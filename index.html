@@ -484,7 +484,7 @@
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const ADMIN_PASSWORD = 'karl2025admin';
   const GITHUB_OWNER   = 'krljde';
-  const GITHUB_REPO    = 'krljde.github.io';
+  const GITHUB_REPO    = 'karljde.github.io';
   const FILE_NOW       = 'data/now.json';
   const FILE_PROJECTS  = 'data/projects.json';
   const API_BASE       = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/`;
@@ -547,10 +547,17 @@
   }
 
   async function readJsonFile(path) {
-    const file = await ghGet(path);
-    if (!file) return { data: [], sha: null };
-    const decoded = decodeURIComponent(escape(atob(file.content.replace(/\n/g,''))));
-    return { data: JSON.parse(decoded), sha: file.sha };
+    const recent = getRecentOverride(path);
+    if (recent) return { data: recent, sha: null };
+
+    try {
+      const res = await fetch(RAW_BASE + path + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) return { data: [], sha: null };
+      const data = await res.json();
+      return { data, sha: null };
+    } catch {
+      return { data: [], sha: null };
+    }
   }
 
   async function uploadMedia(fileInput, statusId) {
@@ -572,6 +579,39 @@
       r.onerror = reject;
       r.readAsDataURL(file);
     });
+  }
+
+
+  function setRecentOverride(path, data) {
+    try {
+      const payload = { ts: Date.now(), data };
+      sessionStorage.setItem(`kjm_recent_${path}`, JSON.stringify(payload));
+    } catch {}
+  }
+
+  function getRecentOverride(path) {
+    try {
+      const raw = sessionStorage.getItem(`kjm_recent_${path}`);
+      if (!raw) return null;
+      const payload = JSON.parse(raw);
+      if (!payload || !Array.isArray(payload.data)) return null;
+      if (Date.now() - (payload.ts || 0) > 30000) {
+        sessionStorage.removeItem(`kjm_recent_${path}`);
+        return null;
+      }
+      return payload.data;
+    } catch {
+      return null;
+    }
+  }
+
+  async function refreshViews() {
+    await Promise.allSettled([
+      renderNow(),
+      renderProjects(),
+      loadAdminNow(),
+      loadAdminProjects()
+    ]);
   }
 
   // ROUTER
