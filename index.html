@@ -43,25 +43,6 @@
     .page.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* WAVE */
-    .wave {
-      display: inline-block;
-      font-style: normal;
-      animation: wave 2.2s ease-in-out 0.4s 3;
-      transform-origin: 70% 80%;
-    }
-    @keyframes wave {
-      0%   { transform: rotate(0deg); }
-      10%  { transform: rotate(18deg); }
-      20%  { transform: rotate(-8deg); }
-      30%  { transform: rotate(18deg); }
-      40%  { transform: rotate(-4deg); }
-      50%  { transform: rotate(12deg); }
-      60%  { transform: rotate(0deg); }
-      100% { transform: rotate(0deg); }
-    }
-
-    /* TYPE */
     h1 {
       font-family: 'Inter', sans-serif;
       font-size: 1rem;
@@ -114,7 +95,6 @@
     }
     .back:hover { color: var(--text); border-bottom-color: #555; }
 
-    /* NAV */
     nav { margin-top: 1.5rem; font-size: 0.9rem; line-height: 2; }
     nav a {
       color: var(--link);
@@ -127,11 +107,9 @@
     nav a:hover { color: var(--link-hover); border-bottom-color: var(--link-hover); }
     nav .sep { color: var(--muted); user-select: none; }
 
-    /* ── CV ── */
     .cv-intro { margin-bottom: 0.5rem; }
     .cv-intro p { font-size: 0.93rem; line-height: 1.8; }
 
-    /* Year heading row */
     .cv-year-heading {
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
@@ -149,30 +127,6 @@
 
     .cv-body-text a { font-size: inherit; }
 
-    /* Collaborator avatars (like read.cv style) */
-    .cv-collabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 0.65rem;
-    }
-
-    .cv-collab {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      transition: background 0.15s, color 0.15s;
-      border: 1px solid #3a3a3a;
-      flex-shrink: 0;
-    }
-    .cv-collab:hover { background: #3a3a3a; color: var(--text-strong); text-decoration: none; border-color: #555; }
-
-    /* ── NOW ── */
     .now-intro { margin-bottom: 2rem; }
     .now-intro p { font-size: 0.9rem; color: var(--muted); }
 
@@ -199,7 +153,6 @@
     }
     .now-bullets li::before { content: '-'; position: absolute; left: 0; color: var(--muted); }
 
-    /* ── PROJECTS ── */
     .project-card { border-top: 1px solid var(--border); padding: 1.25rem 0; }
     .project-card:last-child { border-bottom: 1px solid var(--border); }
     .project-media { width: 100%; border-radius: 6px; margin-bottom: 0.75rem; max-height: 280px; object-fit: cover; display: block; background: var(--border); }
@@ -209,17 +162,14 @@
     .project-desc { font-size: 0.88rem; color: var(--text); margin: 0 0 0.5rem; }
     .project-tag { display: inline-block; font-size: 0.68rem; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; margin-right: 4px; }
 
-    /* ── SERVICES ── */
     .service-row { border-top: 1px solid var(--border); padding: 1.1rem 0; }
     .service-row:last-child { border-bottom: 1px solid var(--border); }
     .service-name { font-weight: 500; font-size: 0.92rem; margin-bottom: 0.2rem; color: var(--text-strong); }
     .service-desc { font-size: 0.87rem; color: var(--text); margin: 0; }
 
-    /* STATES */
     .empty-state { font-size: 0.85rem; color: var(--muted); font-style: italic; padding: 0.75rem 0; }
     .loading { font-size: 0.85rem; color: var(--muted); padding: 0.75rem 0; }
 
-    /* ── ADMIN ── */
     .admin-section { border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin-bottom: 1.5rem; background: #262626; }
     .admin-section > h3 { font-family: 'Inter', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 400; }
 
@@ -248,6 +198,8 @@
     .admin-item-info { flex: 1; }
     .admin-item-info strong { font-weight: 500; display: block; color: var(--text-strong); }
     .admin-item-info span { color: var(--muted); font-size: 0.78rem; }
+    .admin-item-actions { display: flex; gap: 0.45rem; flex-shrink: 0; }
+    .btn-small { font-size: 0.72rem; padding: 0.3rem 0.7rem; }
 
     .status-msg { font-size: 0.8rem; margin-top: 0.6rem; padding: 0.4rem 0.75rem; border-radius: 4px; display: none; }
     .status-msg.ok { background: #1a2e1a; color: #5aaa5a; display: block; }
@@ -271,12 +223,14 @@
     .bullet-row .rm-btn:hover { color: #cc6666; border-color: #444; }
     .add-bullet-btn { font-size: 0.78rem; color: var(--muted); background: none; border: 1px dashed var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s; font-family: 'Inter', sans-serif; margin-top: 0.5rem; }
     .add-bullet-btn:hover { color: var(--text); border-color: #555; }
+
+    .current-media-note { font-size: 0.74rem; color: var(--muted); margin-top: 0.4rem; display: none; }
+    .edit-note { font-size: 0.74rem; color: var(--muted); margin-top: 0.45rem; display: none; }
   </style>
 </head>
 <body>
 <div class="site">
 
-  <!-- HOME -->
   <div class="page active" id="page-home">
     <div style="margin-bottom:0.75rem;font-size:1.4rem;">✌️</div>
     <h1>Hi, I'm Karl.</h1>
@@ -294,7 +248,6 @@
     </nav>
   </div>
 
-  <!-- CV -->
   <div class="page" id="page-cv">
     <span class="back" onclick="go('home')">← Karl Jude M.</span>
     <h1>Karl Jude M.</h1>
@@ -334,7 +287,6 @@
     <p class="cv-body-text">Graduated with a BS in Information Technology from STI College. Completed an internship at an IT company and worked on personal projects throughout. Didn't know it then, but the IT foundation would end up being more useful than expected — just not in the way I planned.</p>
   </div>
 
-  <!-- PROJECTS -->
   <div class="page" id="page-projects">
     <span class="back" onclick="go('home')">← Karl Jude M.</span>
     <h1>Projects</h1>
@@ -342,7 +294,6 @@
     <div id="projects-list"><div class="loading">Loading…</div></div>
   </div>
 
-  <!-- NOW -->
   <div class="page" id="page-now">
     <span class="back" onclick="go('home')">← Karl Jude M.</span>
     <h1>Now</h1>
@@ -352,7 +303,6 @@
     <div id="now-list"><div class="loading">Loading…</div></div>
   </div>
 
-  <!-- SERVICES -->
   <div class="page" id="page-services">
     <span class="back" onclick="go('home')">← Karl Jude M.</span>
     <h1>My services</h1>
@@ -379,10 +329,9 @@
         <p class="service-desc">Events, brand shoots, short-form video. Started as a hobby, became something I do properly. Studio work at <a href="https://studio.karljde.com" target="_blank" rel="noopener">studio.karljde.com↗</a></p>
       </div>
     </div>
-    <p style="margin-top:2rem;font-size:0.88rem;">If any of this sounds useful — <a href="/cdn-cgi/l/email-protection#d1bab0a3bdbba4b5b4bcb0b6b3b0bfbdb0b691b6bcb0b8bdffb2bebc"><span class="__cf_email__" data-cfemail="1873796a74726d7c7d75797f7a797674797f587f75797174367b7775">[email&#160;protected]</span></a></p>
+    <p style="margin-top:2rem;font-size:0.88rem;">If any of this sounds useful — <a href="mailto:karl@example.com">email me</a></p>
   </div>
 
-  <!-- ADMIN -->
   <div class="page" id="page-admin">
     <span class="back" onclick="go('home')">← Karl Jude M.</span>
     <h1>Admin</h1>
@@ -405,7 +354,8 @@
       <h3>Add Now entry</h3>
       <div class="field">
         <label>Date &amp; Location (shown as heading)</label>
-        <input type="text" id="now-heading" placeholder="e.g. Apr 7, 2026, Pampanga, PH"/>
+        <input type="text" id="now-heading" placeholder="Leave blank to auto-fill current date &amp; location"/>
+        <p class="field-hint">If left empty, it will auto-fill using your current local date and location label.</p>
       </div>
       <div class="field">
         <label>Bullet points</label>
@@ -416,9 +366,14 @@
         <label>Photo or Video (optional)</label>
         <input type="file" id="now-media-file" accept="image/*,video/*" onchange="previewMedia(this,'now-media-preview')"/>
         <p class="field-hint">Uploaded to your repo under <code>media/</code>. Keep images under 5MB.</p>
+        <div id="now-current-media" class="current-media-note"></div>
         <img id="now-media-preview" class="media-preview" alt="preview"/>
       </div>
-      <button class="btn" id="btn-add-now" onclick="addNow()">Save to GitHub</button>
+      <div id="now-edit-note" class="edit-note">Editing an existing entry. Upload a new file only if you want to replace the current media.</div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button class="btn" id="btn-add-now" onclick="addNow()">Save to GitHub</button>
+        <button class="btn btn-ghost" id="btn-cancel-now" onclick="cancelNowEdit()" style="display:none;">Cancel edit</button>
+      </div>
       <div class="status-msg" id="now-status"></div>
     </div>
 
@@ -449,9 +404,14 @@
         <label>Photo or Video (optional)</label>
         <input type="file" id="proj-media-file" accept="image/*,video/*" onchange="previewMedia(this,'proj-media-preview')"/>
         <p class="field-hint">Uploaded to your repo under <code>media/</code>.</p>
+        <div id="proj-current-media" class="current-media-note"></div>
         <img id="proj-media-preview" class="media-preview" alt="preview"/>
       </div>
-      <button class="btn" id="btn-add-proj" onclick="addProject()">Save to GitHub</button>
+      <div id="proj-edit-note" class="edit-note">Editing an existing project. Upload a new file only if you want to replace the current media.</div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button class="btn" id="btn-add-proj" onclick="addProject()">Save to GitHub</button>
+        <button class="btn btn-ghost" id="btn-cancel-proj" onclick="cancelProjectEdit()" style="display:none;">Cancel edit</button>
+      </div>
       <div class="status-msg" id="proj-status"></div>
     </div>
 
@@ -463,7 +423,6 @@
 
 </div>
 
-<!-- Login -->
 <div class="admin-login" id="admin-login">
   <div class="login-box">
     <h3>Admin</h3>
@@ -481,12 +440,7 @@
 
 <div class="admin-lock" id="admin-lock" onclick="clickLock()" title="Admin">⚙</div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-  updateTokenStatus();
-  initBulletFields();
-  renderNow().catch(() => {});
-  renderProjects().catch(() => {});
-</script><script>
+<script>
   const ADMIN_PASSWORD = 'karl2025admin';
   const GITHUB_OWNER   = 'krljde';
   const GITHUB_REPO    = 'karljde.github.io';
@@ -498,8 +452,13 @@
   let adminUnlocked = false;
   let currentPage = 'home';
 
-  // TOKEN
+  let editingNowIndex = null;
+  let editingNowMedia = null;
+  let editingProjectIndex = null;
+  let editingProjectMedia = null;
+
   function getToken() { return localStorage.getItem('kjm_gh_token') || ''; }
+
   function saveToken() {
     const t = document.getElementById('token-input').value.trim();
     if (!t) return;
@@ -507,17 +466,22 @@
     document.getElementById('token-input').value = '';
     updateTokenStatus();
   }
-  function clearToken() { localStorage.removeItem('kjm_gh_token'); updateTokenStatus(); }
+
+  function clearToken() {
+    localStorage.removeItem('kjm_gh_token');
+    updateTokenStatus();
+  }
+
   function updateTokenStatus() {
     const el = document.getElementById('token-status');
     if (el) el.textContent = getToken() ? '✓ Token saved.' : 'No token — add one to enable saving.';
   }
 
-  // GITHUB API
   async function ghGet(path) {
     const token = getToken();
     const headers = { 'Accept': 'application/vnd.github.v3+json' };
     if (token) headers['Authorization'] = `token ${token}`;
+
     const res = await fetch(API_BASE + path + '?ref=main&t=' + Date.now(), { headers });
     if (res.status === 404) return null;
     if (!res.ok) throw new Error('GitHub fetch failed: ' + res.status);
@@ -532,73 +496,60 @@
   async function ghPut(path, content, sha, message) {
     const token = getToken();
     if (!token) throw new Error('No GitHub token. Add it in admin first.');
+
     const effectiveSha = sha || await getFileSha(path);
-    const body = { message, content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))), branch: 'main' };
+    const body = {
+      message,
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+      branch: 'main'
+    };
     if (effectiveSha) body.sha = effectiveSha;
+
     const res = await fetch(API_BASE + path, {
       method: 'PUT',
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(body)
     });
-    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(`${res.status}: ${e.message || 'Write failed'}`); }
+
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(`${res.status}: ${e.message || 'Write failed'}`);
+    }
     return res.json();
   }
 
   async function ghPutBinary(path, base64data, sha, message) {
     const token = getToken();
     if (!token) throw new Error('No GitHub token.');
+
     const effectiveSha = sha || await getFileSha(path);
     const body = { message, content: base64data, branch: 'main' };
     if (effectiveSha) body.sha = effectiveSha;
+
     const res = await fetch(API_BASE + path, {
       method: 'PUT',
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(body)
     });
-    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(`${res.status}: ${e.message || 'Upload failed'}`); }
+
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(`${res.status}: ${e.message || 'Upload failed'}`);
+    }
     return res.json();
   }
 
-  async function readJsonFile(path) {
-    const recent = getRecentOverride(path);
-    if (recent) return { data: recent, sha: null };
-
-    try {
-      const res = await fetch(RAW_BASE + path + '?t=' + Date.now(), { cache: 'no-store' });
-      if (!res.ok) return { data: [], sha: null };
-      const data = await res.json();
-      return { data, sha: null };
-    } catch {
-      return { data: [], sha: null };
-    }
-  }
-
-  async function uploadMedia(fileInput, statusId) {
-    const file = fileInput.files[0];
-    if (!file) return null;
-    showStatus(statusId, 'Uploading media…', false);
-    const base64 = await fileToBase64(file);
-    const ext = file.name.split('.').pop();
-    const filename = `media/${Date.now()}.${ext}`;
-    const existing = await ghGet(filename).catch(() => null);
-    await ghPutBinary(filename, base64, existing?.sha || null, `Upload media`);
-    return filename;
-  }
-
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const r = new FileReader();
-      r.onload = () => resolve(r.result.split(',')[1]);
-      r.onerror = reject;
-      r.readAsDataURL(file);
-    });
-  }
-
-
   function setRecentOverride(path, data) {
     try {
-      const payload = { ts: Date.now(), data };
-      sessionStorage.setItem(`kjm_recent_${path}`, JSON.stringify(payload));
+      sessionStorage.setItem(`kjm_recent_${path}`, JSON.stringify({ ts: Date.now(), data }));
     } catch {}
   }
 
@@ -618,6 +569,162 @@
     }
   }
 
+  async function readJsonFile(path) {
+    try {
+      const res = await fetch(RAW_BASE + path + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error('RAW fetch failed');
+      const data = await res.json();
+      setRecentOverride(path, data);
+      return { data, sha: null };
+    } catch {
+      const recent = getRecentOverride(path);
+      if (recent) return { data: recent, sha: null };
+      return { data: [], sha: null };
+    }
+  }
+
+  async function uploadMedia(fileInput, statusId) {
+    const file = fileInput.files[0];
+    if (!file) return null;
+    showStatus(statusId, 'Uploading media…', false);
+    const base64 = await fileToBase64(file);
+    const ext = file.name.split('.').pop();
+    const filename = `media/${Date.now()}.${ext}`;
+    await ghPutBinary(filename, base64, null, 'Upload media');
+    return filename;
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result.split(',')[1]);
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    });
+  }
+
+  function getAutoNowHeading() {
+    const now = new Date();
+    const datePart = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    let locationPart = 'Local time';
+
+    if (tz.includes('/')) {
+      const parts = tz.split('/');
+      locationPart = parts[parts.length - 1].replace(/_/g, ' ');
+    } else if (tz) {
+      locationPart = tz.replace(/_/g, ' ');
+    }
+
+    return `${datePart}, ${locationPart}`;
+  }
+
+  function setButtonText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  function setCurrentMediaNote(id, mediaPath) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (!mediaPath) {
+      el.style.display = 'none';
+      el.textContent = '';
+      return;
+    }
+    el.style.display = 'block';
+    el.textContent = `Current media: ${mediaPath.split('/').pop()}`;
+  }
+
+  function setBullets(containerId, bullets = []) {
+    const c = document.getElementById(containerId);
+    if (!c) return;
+    c.innerHTML = '';
+    const items = bullets.length ? bullets : [''];
+    items.forEach(text => addBulletField(containerId, text));
+  }
+
+  function resetMediaInput(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    if (input) input.value = '';
+    if (preview) {
+      preview.src = '';
+      preview.style.display = 'none';
+    }
+  }
+
+  async function startNowEdit(index) {
+    try {
+      const { data } = await readJsonFile(FILE_NOW);
+      const entry = data[index];
+      if (!entry) return;
+
+      editingNowIndex = index;
+      editingNowMedia = entry.media || null;
+
+      document.getElementById('now-heading').value = entry.heading || '';
+      setBullets('now-bullets-input', entry.bullets || []);
+      setCurrentMediaNote('now-current-media', editingNowMedia);
+      document.getElementById('now-edit-note').style.display = 'block';
+      document.getElementById('btn-cancel-now').style.display = 'inline-block';
+      setButtonText('btn-add-now', 'Update entry');
+      resetMediaInput('now-media-file', 'now-media-preview');
+      showStatus('now-status', 'Editing entry…', false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      showStatus('now-status', e.message || 'Could not load entry for editing.', true);
+    }
+  }
+
+  function cancelNowEdit() {
+    editingNowIndex = null;
+    editingNowMedia = null;
+    document.getElementById('now-heading').value = '';
+    setBullets('now-bullets-input', ['']);
+    setCurrentMediaNote('now-current-media', null);
+    document.getElementById('now-edit-note').style.display = 'none';
+    document.getElementById('btn-cancel-now').style.display = 'none';
+    setButtonText('btn-add-now', 'Save to GitHub');
+    resetMediaInput('now-media-file', 'now-media-preview');
+  }
+
+  async function startProjectEdit(index) {
+    try {
+      const { data } = await readJsonFile(FILE_PROJECTS);
+      const project = data[index];
+      if (!project) return;
+
+      editingProjectIndex = index;
+      editingProjectMedia = project.media || null;
+
+      document.getElementById('proj-title').value = project.title || '';
+      document.getElementById('proj-desc').value = project.desc || '';
+      document.getElementById('proj-url').value = project.url || '';
+      document.getElementById('proj-tags').value = project.tags || '';
+      setCurrentMediaNote('proj-current-media', editingProjectMedia);
+      document.getElementById('proj-edit-note').style.display = 'block';
+      document.getElementById('btn-cancel-proj').style.display = 'inline-block';
+      setButtonText('btn-add-proj', 'Update project');
+      resetMediaInput('proj-media-file', 'proj-media-preview');
+      showStatus('proj-status', 'Editing project…', false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      showStatus('proj-status', e.message || 'Could not load project for editing.', true);
+    }
+  }
+
+  function cancelProjectEdit() {
+    editingProjectIndex = null;
+    editingProjectMedia = null;
+    ['proj-title','proj-desc','proj-url','proj-tags'].forEach(id => document.getElementById(id).value = '');
+    setCurrentMediaNote('proj-current-media', null);
+    document.getElementById('proj-edit-note').style.display = 'none';
+    document.getElementById('btn-cancel-proj').style.display = 'none';
+    setButtonText('btn-add-proj', 'Save to GitHub');
+    resetMediaInput('proj-media-file', 'proj-media-preview');
+  }
+
   async function refreshViews() {
     await Promise.allSettled([
       renderNow(),
@@ -627,45 +734,61 @@
     ]);
   }
 
-  // ROUTER
   function go(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const t = document.getElementById('page-' + page);
-    if (t) { t.classList.add('active'); currentPage = page; window.scrollTo(0, 0); }
+    if (t) {
+      t.classList.add('active');
+      currentPage = page;
+      window.scrollTo(0, 0);
+    }
     if (page === 'now') renderNow();
     if (page === 'projects') renderProjects();
-    if (page === 'admin') { updateTokenStatus(); loadAdminNow(); loadAdminProjects(); initBulletFields(); }
+    if (page === 'admin') {
+      updateTokenStatus();
+      loadAdminNow();
+      loadAdminProjects();
+      initBulletFields();
+    }
   }
 
-  // RENDER NOW
   async function renderNow() {
     const el = document.getElementById('now-list');
     el.innerHTML = '<div class="loading">Loading…</div>';
     try {
       const { data } = await readJsonFile(FILE_NOW);
-      if (!data.length) { el.innerHTML = '<p class="empty-state">Nothing here yet.</p>'; return; }
+      if (!data.length) {
+        el.innerHTML = '<p class="empty-state">Nothing here yet.</p>';
+        return;
+      }
       el.innerHTML = data.slice().reverse().map(e => {
         const mediaHtml = e.media ? renderMediaTag(e.media, 'now-media') : '';
         const bullets = (e.bullets || []).filter(b => b.trim());
-        const bulletsHtml = bullets.length ? `<ul class="now-bullets">${bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>` : '';
+        const bulletsHtml = bullets.length ? `<ul class="now-bullets">${bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>` : '';
         return `<div class="now-block"><div class="now-block-header">${esc(e.heading)}</div>${mediaHtml}${bulletsHtml}</div>`;
       }).join('');
-    } catch { el.innerHTML = '<p class="empty-state">Couldn\'t load entries.</p>'; }
+    } catch {
+      el.innerHTML = '<p class="empty-state">Couldn\'t load entries.</p>';
+    }
   }
 
-  // RENDER PROJECTS
   async function renderProjects() {
     const el = document.getElementById('projects-list');
     el.innerHTML = '<div class="loading">Loading…</div>';
     try {
       const { data } = await readJsonFile(FILE_PROJECTS);
-      if (!data.length) { el.innerHTML = '<p class="empty-state">Projects coming soon.</p>'; return; }
+      if (!data.length) {
+        el.innerHTML = '<p class="empty-state">Projects coming soon.</p>';
+        return;
+      }
       el.innerHTML = data.slice().reverse().map(p => {
         const mediaHtml = p.media ? renderMediaTag(p.media, 'project-media') : '';
-        const tags = (p.tags||'').split(',').filter(t=>t.trim()).map(t=>`<span class="project-tag">${esc(t.trim())}</span>`).join('');
-        return `<div class="project-card">${mediaHtml}<div class="project-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}↗</a>`:esc(p.title)}</div><p class="project-desc">${esc(p.desc)}</p>${tags}</div>`;
+        const tags = (p.tags || '').split(',').filter(t => t.trim()).map(t => `<span class="project-tag">${esc(t.trim())}</span>`).join('');
+        return `<div class="project-card">${mediaHtml}<div class="project-title">${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}↗</a>` : esc(p.title)}</div><p class="project-desc">${esc(p.desc)}</p>${tags}</div>`;
       }).join('');
-    } catch { el.innerHTML = '<p class="empty-state">Couldn\'t load projects.</p>'; }
+    } catch {
+      el.innerHTML = '<p class="empty-state">Couldn\'t load projects.</p>';
+    }
   }
 
   function renderMediaTag(mediaPath, cssClass) {
@@ -675,18 +798,33 @@
     return `<img class="${cssClass}" src="${url}" alt="" loading="lazy"/>`;
   }
 
-  // ADMIN LOAD
   async function loadAdminNow() {
     const el = document.getElementById('admin-now-list');
     el.innerHTML = '<div class="loading">Loading…</div>';
     try {
       const { data } = await readJsonFile(FILE_NOW);
-      if (!data.length) { el.innerHTML = '<div class="empty-state">No entries yet.</div>'; return; }
+      if (!data.length) {
+        el.innerHTML = '<div class="empty-state">No entries yet.</div>';
+        return;
+      }
       el.innerHTML = data.slice().reverse().map((e, ri) => {
         const i = data.length - 1 - ri;
-        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(e.heading)}</strong><span>${(e.bullets||[]).length} bullet(s)${e.media?' · has media':''}</span></div><button class="btn btn-danger" onclick="deleteNow(${i})">Remove</button></div>`;
+        return `<div class="admin-item">
+          <div class="admin-item-info">
+            <strong>${esc(e.heading)}</strong>
+            <span>${(e.bullets||[]).length} bullet(s)${e.media ? ' · has media' : ''}</span>
+          </div>
+          <div class="admin-item-actions">
+            <button class="btn btn-ghost btn-small" onclick="moveNow(${i}, -1)" ${i === 0 ? 'disabled' : ''}>↑</button>
+            <button class="btn btn-ghost btn-small" onclick="moveNow(${i}, 1)" ${i === data.length - 1 ? 'disabled' : ''}>↓</button>
+            <button class="btn btn-ghost btn-small" onclick="startNowEdit(${i})">Edit</button>
+            <button class="btn btn-danger btn-small" onclick="deleteNow(${i})">Remove</button>
+          </div>
+        </div>`;
       }).join('');
-    } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
+    } catch {
+      el.innerHTML = '<div class="empty-state">Could not load.</div>';
+    }
   }
 
   async function loadAdminProjects() {
@@ -694,54 +832,87 @@
     el.innerHTML = '<div class="loading">Loading…</div>';
     try {
       const { data } = await readJsonFile(FILE_PROJECTS);
-      if (!data.length) { el.innerHTML = '<div class="empty-state">No projects yet.</div>'; return; }
+      if (!data.length) {
+        el.innerHTML = '<div class="empty-state">No projects yet.</div>';
+        return;
+      }
       el.innerHTML = data.slice().reverse().map((p, ri) => {
         const i = data.length - 1 - ri;
-        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(p.title)}</strong><span>${esc(p.tags||'')}${p.media?' · has media':''}</span></div><button class="btn btn-danger" onclick="deleteProject(${i})">Remove</button></div>`;
+        return `<div class="admin-item">
+          <div class="admin-item-info">
+            <strong>${esc(p.title)}</strong>
+            <span>${esc(p.tags || '')}${p.media ? ' · has media' : ''}</span>
+          </div>
+          <div class="admin-item-actions">
+            <button class="btn btn-ghost btn-small" onclick="moveProject(${i}, -1)" ${i === 0 ? 'disabled' : ''}>↑</button>
+            <button class="btn btn-ghost btn-small" onclick="moveProject(${i}, 1)" ${i === data.length - 1 ? 'disabled' : ''}>↓</button>
+            <button class="btn btn-ghost btn-small" onclick="startProjectEdit(${i})">Edit</button>
+            <button class="btn btn-danger btn-small" onclick="deleteProject(${i})">Remove</button>
+          </div>
+        </div>`;
       }).join('');
-    } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
+    } catch {
+      el.innerHTML = '<div class="empty-state">Could not load.</div>';
+    }
   }
 
-  // BULLET FIELDS
   function initBulletFields() {
     const c = document.getElementById('now-bullets-input');
     if (c && !c.children.length) addBulletField('now-bullets-input');
   }
-  function addBulletField(containerId) {
+
+  function addBulletField(containerId, value = '') {
     const c = document.getElementById(containerId);
     const row = document.createElement('div');
     row.className = 'bullet-row';
     row.innerHTML = `<textarea placeholder="What's going on…" rows="2"></textarea><button class="rm-btn" onclick="this.parentElement.remove()">×</button>`;
+    row.querySelector('textarea').value = value;
     c.appendChild(row);
   }
+
   function getBullets(containerId) {
-    return Array.from(document.querySelectorAll(`#${containerId} textarea`)).map(t=>t.value.trim()).filter(Boolean);
+    return Array.from(document.querySelectorAll(`#${containerId} textarea`))
+      .map(t => t.value.trim())
+      .filter(Boolean);
   }
 
-  // ADD / DELETE NOW
   async function addNow() {
-    const heading = document.getElementById('now-heading').value.trim();
+    let heading = document.getElementById('now-heading').value.trim();
     const bullets = getBullets('now-bullets-input');
-    if (!heading || !bullets.length) return;
+    if (!bullets.length) {
+      showStatus('now-status', 'Add at least one bullet.', true);
+      return;
+    }
+
+    if (!heading) heading = getAutoNowHeading();
+
     const btn = document.getElementById('btn-add-now');
-    btn.disabled = true; btn.textContent = 'Saving…';
+    btn.disabled = true;
+    btn.textContent = editingNowIndex !== null ? 'Updating…' : 'Saving…';
+
     try {
-      let media = null;
+      let media = editingNowMedia;
       const fi = document.getElementById('now-media-file');
       if (fi.files[0]) media = await uploadMedia(fi, 'now-status');
+
       const { data, sha } = await readJsonFile(FILE_NOW);
-      data.push({ heading, bullets, media });
-      await ghPut(FILE_NOW, data, sha, `Add now entry: ${heading}`);
+      const payload = { heading, bullets, media };
+
+      if (editingNowIndex !== null) data[editingNowIndex] = payload;
+      else data.push(payload);
+
+      await ghPut(FILE_NOW, data, sha, `${editingNowIndex !== null ? 'Update' : 'Add'} now entry: ${heading}`);
       setRecentOverride(FILE_NOW, data);
-      document.getElementById('now-heading').value = '';
-      document.getElementById('now-bullets-input').innerHTML = '';
-      addBulletField('now-bullets-input');
-      fi.value = '';
-      document.getElementById('now-media-preview').style.display = 'none';
-      showStatus('now-status', 'Saved ✓', false);
+
+      cancelNowEdit();
+      showStatus('now-status', editingNowIndex !== null ? 'Updated ✓' : 'Saved ✓', false);
       await refreshViews();
-    } catch(e) { showStatus('now-status', e.message, true); }
-    btn.disabled = false; btn.textContent = 'Save to GitHub';
+    } catch (e) {
+      showStatus('now-status', e.message || 'Save failed.', true);
+    }
+
+    btn.disabled = false;
+    btn.textContent = editingNowIndex !== null ? 'Update entry' : 'Save to GitHub';
   }
 
   async function deleteNow(i) {
@@ -751,35 +922,70 @@
       data.splice(i, 1);
       await ghPut(FILE_NOW, data, sha, 'Remove now entry');
       setRecentOverride(FILE_NOW, data);
+
+      if (editingNowIndex === i) cancelNowEdit();
+      else if (editingNowIndex !== null && i < editingNowIndex) editingNowIndex -= 1;
+
       showStatus('now-status', 'Removed ✓', false);
       await refreshViews();
-    } catch(e) { showStatus('now-status', e.message, true); }
+    } catch (e) {
+      showStatus('now-status', e.message || 'Delete failed.', true);
+    }
   }
 
-  // ADD / DELETE PROJECT
+  async function moveNow(i, direction) {
+    try {
+      const { data, sha } = await readJsonFile(FILE_NOW);
+      const newIndex = i + direction;
+      if (newIndex < 0 || newIndex >= data.length) return;
+      [data[i], data[newIndex]] = [data[newIndex], data[i]];
+      await ghPut(FILE_NOW, data, sha, 'Reorder now entries');
+      setRecentOverride(FILE_NOW, data);
+      showStatus('now-status', 'Order updated ✓', false);
+      await refreshViews();
+    } catch (e) {
+      showStatus('now-status', e.message || 'Reorder failed.', true);
+    }
+  }
+
   async function addProject() {
     const title = document.getElementById('proj-title').value.trim();
     const desc  = document.getElementById('proj-desc').value.trim();
     const url   = document.getElementById('proj-url').value.trim();
     const tags  = document.getElementById('proj-tags').value.trim();
-    if (!title) return;
+
+    if (!title) {
+      showStatus('proj-status', 'Title is required.', true);
+      return;
+    }
+
     const btn = document.getElementById('btn-add-proj');
-    btn.disabled = true; btn.textContent = 'Saving…';
+    btn.disabled = true;
+    btn.textContent = editingProjectIndex !== null ? 'Updating…' : 'Saving…';
+
     try {
-      let media = null;
+      let media = editingProjectMedia;
       const fi = document.getElementById('proj-media-file');
       if (fi.files[0]) media = await uploadMedia(fi, 'proj-status');
+
       const { data, sha } = await readJsonFile(FILE_PROJECTS);
-      data.push({ title, desc, url, tags, media });
-      await ghPut(FILE_PROJECTS, data, sha, `Add project: ${title}`);
+      const payload = { title, desc, url, tags, media };
+
+      if (editingProjectIndex !== null) data[editingProjectIndex] = payload;
+      else data.push(payload);
+
+      await ghPut(FILE_PROJECTS, data, sha, `${editingProjectIndex !== null ? 'Update' : 'Add'} project: ${title}`);
       setRecentOverride(FILE_PROJECTS, data);
-      ['proj-title','proj-desc','proj-url','proj-tags'].forEach(id=>document.getElementById(id).value='');
-      fi.value = '';
-      document.getElementById('proj-media-preview').style.display = 'none';
-      showStatus('proj-status', 'Saved ✓', false);
+
+      cancelProjectEdit();
+      showStatus('proj-status', editingProjectIndex !== null ? 'Updated ✓' : 'Saved ✓', false);
       await refreshViews();
-    } catch(e) { showStatus('proj-status', e.message, true); }
-    btn.disabled = false; btn.textContent = 'Save to GitHub';
+    } catch (e) {
+      showStatus('proj-status', e.message || 'Save failed.', true);
+    }
+
+    btn.disabled = false;
+    btn.textContent = editingProjectIndex !== null ? 'Update project' : 'Save to GitHub';
   }
 
   async function deleteProject(i) {
@@ -789,22 +995,47 @@
       data.splice(i, 1);
       await ghPut(FILE_PROJECTS, data, sha, 'Remove project');
       setRecentOverride(FILE_PROJECTS, data);
+
+      if (editingProjectIndex === i) cancelProjectEdit();
+      else if (editingProjectIndex !== null && i < editingProjectIndex) editingProjectIndex -= 1;
+
       showStatus('proj-status', 'Removed ✓', false);
       await refreshViews();
-    } catch(e) { showStatus('proj-status', e.message, true); }
+    } catch (e) {
+      showStatus('proj-status', e.message || 'Delete failed.', true);
+    }
   }
 
-  // MEDIA PREVIEW
+  async function moveProject(i, direction) {
+    try {
+      const { data, sha } = await readJsonFile(FILE_PROJECTS);
+      const newIndex = i + direction;
+      if (newIndex < 0 || newIndex >= data.length) return;
+      [data[i], data[newIndex]] = [data[newIndex], data[i]];
+      await ghPut(FILE_PROJECTS, data, sha, 'Reorder projects');
+      setRecentOverride(FILE_PROJECTS, data);
+      showStatus('proj-status', 'Order updated ✓', false);
+      await refreshViews();
+    } catch (e) {
+      showStatus('proj-status', e.message || 'Reorder failed.', true);
+    }
+  }
+
   function previewMedia(input, previewId) {
     const preview = document.getElementById(previewId);
     const file = input.files[0];
-    if (!file || !file.type.startsWith('image/')) { preview.style.display = 'none'; return; }
+    if (!file || !file.type.startsWith('image/')) {
+      preview.style.display = 'none';
+      return;
+    }
     const reader = new FileReader();
-    reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
+    reader.onload = e => {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
     reader.readAsDataURL(file);
   }
 
-  // ADMIN LOCK
   let lockClicks = 0, lockTimer;
   function clickLock() {
     if (adminUnlocked) {
@@ -843,11 +1074,11 @@
     document.getElementById('login-error').style.display = 'none';
   }
 
-    // UTILS
   function esc(s) {
     if (!s) return '';
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+
   function showStatus(id, msg, isErr) {
     const el = document.getElementById(id);
     if (!el) return;
