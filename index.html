@@ -3,459 +3,669 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Karl Jude M. — Creative Director & Automation Expert based in Pampanga, Philippines."/>
-  <title>Karl Jude M. — Creative Director & Automation Expert</title>
+  <meta name="description" content="Karl Jude M. — Creative & Marketing Lead based in Pampanga, PH."/>
+  <title>Karl Jude M.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0a;
-      --bg2: #111111;
-      --bg3: #161616;
-      --border: rgba(255,255,255,0.07);
-      --text: #f0ece4;
-      --muted: #6b6660;
-      --accent: #c9a96e;
-      --accent2: #8b6f47;
+      --text: #1a1a1a;
+      --muted: #888;
+      --border: #e8e8e8;
+      --bg: #ffffff;
     }
-
-    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
       font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.4;
+    .site {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 64px 24px 120px;
     }
 
-    /* HERO */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(2rem, 8vw, 5rem) clamp(1.5rem, 6vw, 4rem);
-      position: relative;
-      border-bottom: 1px solid var(--border);
-    }
+    .page { display: none; animation: fadeIn 0.2s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -200px; right: -100px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.68rem;
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: 1.55rem;
       font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.2s;
-    }
-
-    .hero-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.8rem, 13vw, 8.5rem);
-      font-weight: 300;
-      line-height: 0.92;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.4s;
-    }
-
-    .hero-name em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-tagline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.05rem, 2.8vw, 1.45rem);
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(240,236,228,0.55);
-      max-width: 500px;
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.6s;
-      line-height: 1.6;
-    }
-
-    .hero-meta {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.8s;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem 1.5rem;
-    }
-
-    .hero-meta span::before {
-      content: '— ';
-      color: var(--accent);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: clamp(1.5rem, 6vw, 4rem);
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 1.1s;
-    }
-
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 36px; height: 1px;
-      background: var(--muted);
-    }
-
-    /* SECTIONS */
-    section {
-      padding: clamp(3rem, 10vw, 6rem) clamp(1.5rem, 6vw, 4rem);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-label {
-      font-size: 0.63rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-      max-width: 60px;
-    }
-
-    .section-heading {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 2rem;
+      line-height: 1.35;
+      margin-bottom: 0.85rem;
       letter-spacing: -0.01em;
     }
 
-    .section-heading em { font-style: italic; color: var(--accent); }
-
-    .body-text {
-      font-size: clamp(0.88rem, 2.2vw, 0.98rem);
-      color: rgba(240,236,228,0.62);
-      max-width: 600px;
-      margin-bottom: 1.5rem;
-      line-height: 1.9;
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      margin: 2.5rem 0 0.75rem;
     }
 
-    .body-text strong { color: var(--text); font-weight: 500; }
-    .body-text:last-of-type { margin-bottom: 0; }
+    p { color: #3a3a3a; margin-bottom: 1rem; font-weight: 300; }
+    p:last-child { margin-bottom: 0; }
 
-    /* STORY BLOCKS */
-    .story-block {
-      margin-bottom: 2rem;
-      padding-left: 1.25rem;
-      border-left: 1px solid var(--accent2);
-    }
+    .muted { color: var(--muted); font-size: 0.88rem; }
+
+    a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #ccc; transition: text-decoration-color 0.15s; }
+    a:hover { text-decoration-color: var(--text); }
+
+    .back { display: inline-block; font-size: 0.88rem; color: var(--muted); text-decoration: none; border-bottom: 1px solid #ddd; margin-bottom: 1.75rem; cursor: pointer; }
+    .back:hover { color: var(--text); border-bottom-color: var(--text); }
+
+    /* NAV */
+    nav { margin-top: 1.5rem; font-size: 0.9rem; }
+    nav a { color: var(--text); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: border-color 0.15s; cursor: pointer; }
+    nav a:hover { border-bottom-color: var(--text); }
+    nav .sep { color: var(--muted); user-select: none; }
+
+    /* CV */
+    .cv-entry { display: grid; grid-template-columns: 58px 1fr; gap: 0 1.25rem; margin-bottom: 1.5rem; align-items: baseline; }
+    .cv-year { font-size: 0.78rem; color: var(--muted); padding-top: 2px; letter-spacing: 0.03em; }
+    .cv-body strong { font-weight: 500; font-size: 0.95rem; }
+    .cv-body p { font-size: 0.88rem; color: #555; margin: 0.15rem 0 0; }
+
+    /* NOW */
+    .now-entry { border-top: 1px solid var(--border); padding: 1.25rem 0; }
+    .now-entry:last-child { border-bottom: 1px solid var(--border); }
+    .now-date { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.35rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .now-entry p { font-size: 0.92rem; margin: 0; }
+
+    /* PROJECTS */
+    .project-card { border-top: 1px solid var(--border); padding: 1.25rem 0; }
+    .project-card:last-child { border-bottom: 1px solid var(--border); }
+    .project-title { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .project-title a { text-decoration: none; border-bottom: 1px solid #ccc; }
+    .project-title a:hover { border-bottom-color: var(--text); }
+    .project-desc { font-size: 0.88rem; color: #555; margin: 0 0 0.5rem; }
+    .project-tag { display: inline-block; font-size: 0.7rem; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; margin-right: 4px; }
 
     /* SERVICES */
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1px;
-      background: var(--border);
-      margin-top: 2.5rem;
+    .service-row { border-top: 1px solid var(--border); padding: 1.25rem 0; }
+    .service-row:last-child { border-bottom: 1px solid var(--border); }
+    .service-name { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .service-desc { font-size: 0.88rem; color: #555; margin: 0; }
+
+    /* STATES */
+    .empty-state { font-size: 0.85rem; color: var(--muted); font-style: italic; padding: 1rem 0; }
+    .loading { font-size: 0.85rem; color: var(--muted); padding: 1rem 0; }
+
+    /* ADMIN */
+    .admin-section { border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .admin-section h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; }
+
+    .field { margin-bottom: 0.75rem; }
+    .field label { display: block; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .field input, .field textarea {
+      width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; font-weight: 300;
+      color: var(--text); background: #fafafa; border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.5rem 0.65rem; outline: none; transition: border-color 0.15s; resize: vertical;
     }
+    .field input:focus, .field textarea:focus { border-color: #aaa; background: #fff; }
 
-    @media (min-width: 580px) {
-      .services-grid { grid-template-columns: 1fr 1fr; }
-    }
+    .btn { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.03em; padding: 0.45rem 1rem; border-radius: 4px; border: 1px solid var(--text); background: var(--text); color: #fff; cursor: pointer; transition: background 0.15s; }
+    .btn:hover { background: #333; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-ghost { background: transparent; color: var(--text); }
+    .btn-ghost:hover { background: #f5f5f5; }
+    .btn-danger { border-color: #e05555; background: transparent; color: #e05555; font-size: 0.72rem; padding: 0.3rem 0.7rem; }
+    .btn-danger:hover { background: #e05555; color: #fff; }
 
-    .service-card {
-      background: var(--bg2);
-      padding: clamp(1.5rem, 4vw, 2rem);
-      transition: background 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
+    .admin-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .admin-item:last-child { border-bottom: none; }
+    .admin-item-info { flex: 1; }
+    .admin-item-info strong { font-weight: 500; display: block; }
+    .admin-item-info span { color: var(--muted); font-size: 0.78rem; }
 
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 2px; height: 0;
-      background: var(--accent);
-      transition: height 0.4s ease;
-    }
+    .status-msg { font-size: 0.8rem; margin-top: 0.5rem; padding: 0.4rem 0.75rem; border-radius: 4px; display: none; }
+    .status-msg.ok { background: #f0faf0; color: #2a7a2a; display: block; }
+    .status-msg.err { background: #fdf0f0; color: #a33; display: block; }
 
-    .service-card:hover { background: var(--bg3); }
-    .service-card:hover::before { height: 100%; }
+    /* LOCK */
+    .admin-lock { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 34px; height: 34px; border-radius: 50%; background: #f5f5f5; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; color: var(--muted); transition: background 0.15s, color 0.15s; z-index: 100; user-select: none; }
+    .admin-lock:hover { background: #ececec; color: var(--text); }
+    .admin-lock.active { background: var(--text); color: #fff; }
 
-    .service-icon {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-
-    .service-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 400;
-      margin-bottom: 0.6rem;
-    }
-
-    .service-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    /* CONTACT */
-    .contact-section {
-      text-align: center;
-      padding: clamp(3.5rem, 10vw, 6rem) clamp(1.5rem, 6vw, 4rem);
-    }
-
-    .contact-cta {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 300;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-cta em { font-style: italic; color: var(--accent); }
-
-    .contact-sub {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      letter-spacing: 0.05em;
-    }
-
-    .contact-email {
-      display: inline-block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      font-style: italic;
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid var(--accent2);
-      padding-bottom: 0.15rem;
-      transition: color 0.25s, border-color 0.25s;
-      margin-bottom: 3rem;
-    }
-
-    .contact-email:hover { color: var(--text); border-color: var(--text); }
-
-    .social-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem 2rem;
-    }
-
-    .social-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .social-link:hover { color: var(--accent); }
-
-    .social-link svg {
-      width: 15px; height: 15px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 1.5rem clamp(1.5rem, 6vw, 4rem);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    footer p {
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* LOGIN OVERLAY */
+    .admin-login { position: fixed; inset: 0; background: rgba(255,255,255,0.96); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(4px); }
+    .admin-login.open { display: flex; }
+    .login-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; width: 320px; box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .login-box h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .login-box .sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .login-error { font-size: 0.78rem; color: #e05555; margin-top: 0.5rem; display: none; }
+    .token-note { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.5; }
   </style>
 </head>
 <body>
+<div class="site">
 
-  <!-- HERO -->
-  <header class="hero">
-    <p class="hero-eyebrow">Creative Director &amp; Automation Expert</p>
-    <h1 class="hero-name">Karl<br/><em>Jude</em> M.</h1>
-    <p class="hero-tagline">"I don't just build brands;<br/>I build engines that run them."</p>
-    <div class="hero-meta">
-      <span>Pampanga, Philippines</span>
-      <span>4+ Years Experience</span>
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <h1>Hi, I'm Karl Jude.</h1>
+    <p>
+      Creative &amp; Marketing Lead based in Pampanga, PH.
+      Currently working at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> as their All-in-One Marketing Specialist &amp; Creative Lead.
+      Before that, I was a freelancer working with startups across Pampanga, and before that, a Tech CSR at Sutherland in Clark.
+      Originally trained as an IT specialist.
+    </p>
+    <p>
+      Right now I'm actively learning and building in <strong>Marketing Automation</strong> — integrating tools like n8n, Zapier, and GoHighLevel to close the gap between getting a lead and securing a client.
+    </p>
+    <nav>
+      <a onclick="go('cv')">CV</a><span class="sep"> · </span><a onclick="go('projects')">Projects</a><span class="sep"> · </span><a onclick="go('now')">Now</a><span class="sep"> · </span><a onclick="go('services')">My services</a><span class="sep"> · </span><a href="https://github.com/krljde" target="_blank" rel="noopener">Github↗</a>
+    </nav>
+  </div>
+
+  <!-- CV -->
+  <div class="page" id="page-cv">
+    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <h1>CV</h1>
+
+    <h2>Currently</h2>
+    <div class="cv-entry">
+      <span class="cv-year">2024–</span>
+      <div class="cv-body">
+        <strong>Creative &amp; Marketing Lead — <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori↗</a></strong>
+        <p>All-in-one marketing specialist, GHL expert, brand identity, funnels, enrollment KPIs, and full creative direction.</p>
+      </div>
     </div>
-    <div class="scroll-hint">Scroll</div>
-  </header>
 
-  <!-- STORY -->
-  <section id="story">
-    <p class="section-label reveal">The Story</p>
-    <h2 class="section-heading reveal">Where it all <em>began</em></h2>
-
-    <div class="story-block reveal">
-      <p class="body-text">I started my journey in 2022, right as the world was navigating the tail end of the pandemic. While physical marketing was at a standstill, I saw the untapped potential of digital ecosystems.</p>
+    <h2>Experience</h2>
+    <div class="cv-entry">
+      <span class="cv-year">2025</span>
+      <div class="cv-body">
+        <strong>Sales Process &amp; Media Buying</strong>
+        <p>Self-directed study into paid media strategy and high-ticket sales processes. Ongoing.</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="cv-year">2022–24</span>
+      <div class="cv-body">
+        <strong>Freelance Creative, SMM &amp; Graphic Designer</strong>
+        <p>Graphic design, photography, and cinematography for early-stage businesses across Pampanga. Leveraged personal photography hobby into professional work.</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="cv-year">2021</span>
+      <div class="cv-body">
+        <strong>Freelance Social Media Manager</strong>
+        <p>Organic growth strategy for startups. Grew one client from zero to 7,000+ followers — 80% converted to recurring clients with zero ad spend.</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="cv-year">2020</span>
+      <div class="cv-body">
+        <strong>Tech Customer Service Representative — Sutherland, Clark</strong>
+        <p>Technical support in a fast-paced BPO environment.</p>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <span class="cv-year">2019</span>
+      <div class="cv-body">
+        <strong>Gap year</strong>
+        <p>Deepened skills in photography and cinematography before entering the workforce. Pandemic era made job hunting difficult — used the time well.</p>
+      </div>
     </div>
 
-    <div class="story-block reveal">
-      <p class="body-text">My first challenge was scaling a small business from the ground up during a time of global uncertainty. By focusing on community-driven content and organic strategy, I grew their following to <strong>7,000+</strong> and successfully converted <strong>80% of that audience</strong> into recurring monthly clients — all without spending a single cent on ads.</p>
+    <h2>Education</h2>
+    <div class="cv-entry">
+      <span class="cv-year">2018</span>
+      <div class="cv-body">
+        <strong>BS Information Technology — STI College</strong>
+        <p>Graduated with internship at an IT company. Worked on personal development projects throughout.</p>
+      </div>
     </div>
 
-    <div class="story-block reveal">
-      <p class="body-text">That success caught the attention of my next major partner: a local school. What began as a social media project evolved into a role as their <strong>All-In-One Marketing Service Provider</strong>. I've spent the last few years defining their brand identity, hitting enrollment KPIs, and managing every creative touchpoint — from physical stationery to digital funnels.</p>
+    <h2>Currently learning</h2>
+    <div class="cv-entry">
+      <span class="cv-year">Now</span>
+      <div class="cv-body">
+        <strong>Marketing Automation</strong>
+        <p>Actively studying and building with n8n, Zapier, and GoHighLevel — automating the full customer journey from lead capture to close.</p>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- AUTOMATION -->
-  <section id="automation">
-    <p class="section-label reveal">The Evolution</p>
-    <h2 class="section-heading reveal">Beyond marketing —<br/><em>Automation</em></h2>
-    <p class="body-text reveal">Experience has taught me that great marketing is only half the battle. To prevent lead churn and ensure no opportunity is wasted, I expanded into <strong>Marketing Automation</strong>.</p>
-    <p class="body-text reveal">By integrating tools like <strong>n8n, Zapier, and GoHighLevel</strong>, I bridge the gap between "getting a lead" and "securing a client." I don't just post content — I build conversion funnels that work while you sleep.</p>
-  </section>
+  <!-- PROJECTS -->
+  <div class="page" id="page-projects">
+    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <h1>Projects</h1>
+    <p class="muted">Things I've built or been part of.</p>
+    <div id="projects-list" style="margin-top:1.5rem;"><div class="loading">Loading…</div></div>
+  </div>
+
+  <!-- NOW -->
+  <div class="page" id="page-now">
+    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <h1>Now</h1>
+    <p class="muted">What I'm up to. Updated whenever something changes.</p>
+    <div id="now-list" style="margin-top:1.5rem;"><div class="loading">Loading…</div></div>
+  </div>
 
   <!-- SERVICES -->
-  <section id="services">
-    <p class="section-label reveal">What I Offer</p>
-    <h2 class="section-heading reveal">Full-stack infrastructure<br/>for businesses ready to <em>scale</em></h2>
-
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-icon">✦</div>
-        <h3 class="service-title">Creative Direction</h3>
-        <p class="service-desc">Brand identity, professional photography, and videography that communicates who you are before you say a word.</p>
+  <div class="page" id="page-services">
+    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <h1>My services</h1>
+    <p>End-to-end creative and marketing infrastructure for businesses that want to grow both their identity and operations.</p>
+    <div style="margin-top:1.75rem;">
+      <div class="service-row">
+        <div class="service-name">Creative Direction</div>
+        <p class="service-desc">Brand identity, art direction, and visual strategy. I define how your brand looks, sounds, and feels across every touchpoint.</p>
       </div>
-      <div class="service-card reveal">
-        <div class="service-icon">◈</div>
-        <h3 class="service-title">Design — Digital &amp; Physical</h3>
-        <p class="service-desc">High-conversion social assets to professional stationery. Every pixel and every print, intentional.</p>
+      <div class="service-row">
+        <div class="service-name">Design — Digital &amp; Physical</div>
+        <p class="service-desc">Social media assets, business stationery, marketing collateral. From scroll-stopping posts to print you're proud to hand over.</p>
       </div>
-      <div class="service-card reveal">
-        <div class="service-icon">◎</div>
-        <h3 class="service-title">Growth Marketing</h3>
-        <p class="service-desc">Organic strategy, media buying, and GoHighLevel funnel builds engineered to grow your audience and convert it.</p>
+      <div class="service-row">
+        <div class="service-name">Growth Marketing &amp; Funnels</div>
+        <p class="service-desc">Organic strategy, media buying, and GoHighLevel funnel builds. I don't just post content — I build conversion systems.</p>
       </div>
-      <div class="service-card reveal">
-        <div class="service-icon">⟳</div>
-        <h3 class="service-title">Automation &amp; Systems</h3>
-        <p class="service-desc">Using n8n and Zapier to eliminate manual churn and automate the customer journey — so no lead ever slips through.</p>
+      <div class="service-row">
+        <div class="service-name">Marketing Automation</div>
+        <p class="service-desc">Using n8n, Zapier, and GoHighLevel to automate the customer journey — so no lead slips through and no follow-up is missed.</p>
+      </div>
+      <div class="service-row">
+        <div class="service-name">Photography &amp; Cinematography</div>
+        <p class="service-desc">Event photography, brand shoots, and short-form video. Visit my dedicated studio — <a href="https://studio.karljde.com" target="_blank" rel="noopener">studio.karljde.com↗</a></p>
       </div>
     </div>
-  </section>
+    <p style="margin-top:2rem;font-size:0.88rem;">Get in touch — <a href="mailto:karljudemagbanlag@gmail.com">karljudemagbanlag@gmail.com</a></p>
+  </div>
 
-  <!-- CONTACT -->
-  <section class="contact-section" id="contact">
-    <p class="section-label reveal" style="justify-content:center;">Let's Work</p>
-    <h2 class="contact-cta reveal">Have a project in mind?<br/><em>Let's talk.</em></h2>
-    <p class="contact-sub reveal">Drop me a message and I'll get back to you.</p>
-    <a href="mailto:karljudemagbanlag@gmail.com" class="contact-email reveal">karljudemagbanlag@gmail.com</a>
+  <!-- ADMIN -->
+  <div class="page" id="page-admin">
+    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <h1>Admin</h1>
 
-    <div class="social-row reveal">
-      <a href="https://facebook.com/krljde" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.628 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.887v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-        Facebook
-      </a>
-      <a href="https://instagram.com/krljde" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        Instagram
-      </a>
-      <a href="https://www.linkedin.com/in/krljde" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
+    <!-- Token status -->
+    <div class="admin-section" id="token-section">
+      <h3>GitHub token</h3>
+      <div id="token-status" class="muted" style="margin-bottom:0.75rem;font-size:0.85rem;"></div>
+      <div class="field">
+        <label>Personal Access Token</label>
+        <input type="password" id="token-input" placeholder="ghp_..."/>
+      </div>
+      <div style="display:flex;gap:0.5rem;">
+        <button class="btn" onclick="saveToken()">Save token</button>
+        <button class="btn btn-ghost" onclick="clearToken()">Clear</button>
+      </div>
+      <p class="token-note">Your token is stored only in this browser's localStorage. It is never sent anywhere except directly to api.github.com.</p>
     </div>
-  </section>
 
-  <footer>
-    <p>© 2025 Karl Jude M.</p>
-    <p>Pampanga, Philippines</p>
-  </footer>
+    <!-- Add Now Entry -->
+    <div class="admin-section">
+      <h3>Add Now entry</h3>
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="now-date"/>
+      </div>
+      <div class="field">
+        <label>Entry</label>
+        <textarea id="now-text" rows="3" placeholder="What's happening right now…"></textarea>
+      </div>
+      <button class="btn" id="btn-add-now" onclick="addNow()">Save to GitHub</button>
+      <div class="status-msg" id="now-status"></div>
+    </div>
 
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+    <!-- Existing Now Entries -->
+    <div class="admin-section">
+      <h3>Now entries</h3>
+      <div id="admin-now-list"><div class="loading">Loading…</div></div>
+    </div>
 
+    <!-- Add Project -->
+    <div class="admin-section">
+      <h3>Add project</h3>
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="proj-title" placeholder="Project name"/>
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <textarea id="proj-desc" rows="2" placeholder="What is it?"></textarea>
+      </div>
+      <div class="field">
+        <label>URL (optional)</label>
+        <input type="text" id="proj-url" placeholder="https://…"/>
+      </div>
+      <div class="field">
+        <label>Tags (comma separated)</label>
+        <input type="text" id="proj-tags" placeholder="automation, design"/>
+      </div>
+      <button class="btn" id="btn-add-proj" onclick="addProject()">Save to GitHub</button>
+      <div class="status-msg" id="proj-status"></div>
+    </div>
+
+    <!-- Existing Projects -->
+    <div class="admin-section">
+      <h3>Projects</h3>
+      <div id="admin-projects-list"><div class="loading">Loading…</div></div>
+    </div>
+  </div>
+
+</div><!-- /site -->
+
+<!-- Login overlay -->
+<div class="admin-login" id="admin-login">
+  <div class="login-box">
+    <h3>Admin access</h3>
+    <p class="sub">This panel writes directly to your GitHub repo.</p>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="admin-pass" placeholder="Enter password" onkeydown="if(event.key==='Enter')tryLogin()"/>
+    </div>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <button class="btn" onclick="tryLogin()">Enter</button>
+      <button class="btn btn-ghost" onclick="closeLogin()">Cancel</button>
+    </div>
+    <div class="login-error" id="login-error">Incorrect password.</div>
+  </div>
+</div>
+
+<div class="admin-lock" id="admin-lock" onclick="clickLock()" title="Admin">⚙</div>
+
+<script>
+  // ── CONFIG ──
+  const ADMIN_PASSWORD = 'karl2025admin'; // Change this!
+  const GITHUB_OWNER   = 'krljde';
+  const GITHUB_REPO    = 'krljde.github.io';
+  const FILE_NOW       = 'data/now.json';
+  const FILE_PROJECTS  = 'data/projects.json';
+  const API_BASE       = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/`;
+
+  let adminUnlocked = false;
+  let currentPage   = 'home';
+
+  // ── TOKEN ──
+  function getToken() { return localStorage.getItem('kjm_gh_token') || ''; }
+  function saveToken() {
+    const t = document.getElementById('token-input').value.trim();
+    if (!t) return;
+    localStorage.setItem('kjm_gh_token', t);
+    document.getElementById('token-input').value = '';
+    updateTokenStatus();
+    showStatus('token-status', 'Token saved.', false, true);
+  }
+  function clearToken() {
+    localStorage.removeItem('kjm_gh_token');
+    updateTokenStatus();
+  }
+  function updateTokenStatus() {
+    const el = document.getElementById('token-status');
+    if (!el) return;
+    el.textContent = getToken() ? '✓ Token saved in this browser.' : 'No token saved — add one below to enable saving.';
+  }
+
+  // ── GITHUB API ──
+  async function ghGet(path) {
+    const res = await fetch(API_BASE + path + '?ref=main', {
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error('GitHub fetch failed: ' + res.status);
+    return res.json();
+  }
+
+  async function ghPut(path, content, sha, message) {
+    const token = getToken();
+    if (!token) throw new Error('No GitHub token saved. Add your token in the Admin panel first.');
+    const body = {
+      message,
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+      branch: 'main'
+    };
+    if (sha) body.sha = sha;
+    const res = await fetch(API_BASE + path, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.message || 'GitHub write failed: ' + res.status);
+    }
+    return res.json();
+  }
+
+  async function readJsonFile(path) {
+    const file = await ghGet(path);
+    if (!file) return { data: [], sha: null };
+    const decoded = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+    return { data: JSON.parse(decoded), sha: file.sha };
+  }
+
+  // ── ROUTER ──
+  function go(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + page);
+    if (target) { target.classList.add('active'); currentPage = page; window.scrollTo(0, 0); }
+    if (page === 'now') renderNow();
+    if (page === 'projects') renderProjects();
+    if (page === 'admin') { updateTokenStatus(); loadAdminNow(); loadAdminProjects(); }
+  }
+
+  // ── RENDER NOW (public) ──
+  async function renderNow() {
+    const el = document.getElementById('now-list');
+    el.innerHTML = '<div class="loading">Loading…</div>';
+    try {
+      const { data } = await readJsonFile(FILE_NOW);
+      if (!data.length) { el.innerHTML = '<p class="empty-state">Nothing here yet — check back soon.</p>'; return; }
+      el.innerHTML = data.slice().reverse().map(e => `
+        <div class="now-entry">
+          <div class="now-date">${formatDate(e.date)}</div>
+          <p>${esc(e.text)}</p>
+        </div>`).join('');
+    } catch(err) {
+      el.innerHTML = `<p class="empty-state">Couldn't load entries.</p>`;
+    }
+  }
+
+  // ── RENDER PROJECTS (public) ──
+  async function renderProjects() {
+    const el = document.getElementById('projects-list');
+    el.innerHTML = '<div class="loading">Loading…</div>';
+    try {
+      const { data } = await readJsonFile(FILE_PROJECTS);
+      if (!data.length) { el.innerHTML = '<p class="empty-state">Projects coming soon.</p>'; return; }
+      el.innerHTML = data.slice().reverse().map(p => `
+        <div class="project-card">
+          <div class="project-title">${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}↗</a>` : esc(p.title)}</div>
+          <p class="project-desc">${esc(p.desc)}</p>
+          ${(p.tags||'').split(',').filter(t=>t.trim()).map(t=>`<span class="project-tag">${esc(t.trim())}</span>`).join('')}
+        </div>`).join('');
+    } catch(err) {
+      el.innerHTML = `<p class="empty-state">Couldn't load projects.</p>`;
+    }
+  }
+
+  // ── ADMIN: LOAD NOW ──
+  async function loadAdminNow() {
+    const el = document.getElementById('admin-now-list');
+    el.innerHTML = '<div class="loading">Loading…</div>';
+    try {
+      const { data } = await readJsonFile(FILE_NOW);
+      if (!data.length) { el.innerHTML = '<div class="empty-state">No entries yet.</div>'; return; }
+      el.innerHTML = data.slice().reverse().map((e, ri) => {
+        const i = data.length - 1 - ri;
+        return `<div class="admin-item">
+          <div class="admin-item-info">
+            <strong>${esc(e.text.substring(0,70))}${e.text.length>70?'…':''}</strong>
+            <span>${formatDate(e.date)}</span>
+          </div>
+          <button class="btn btn-danger" onclick="deleteNow(${i})">Remove</button>
+        </div>`;
+      }).join('');
+    } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
+  }
+
+  // ── ADMIN: LOAD PROJECTS ──
+  async function loadAdminProjects() {
+    const el = document.getElementById('admin-projects-list');
+    el.innerHTML = '<div class="loading">Loading…</div>';
+    try {
+      const { data } = await readJsonFile(FILE_PROJECTS);
+      if (!data.length) { el.innerHTML = '<div class="empty-state">No projects yet.</div>'; return; }
+      el.innerHTML = data.slice().reverse().map((p, ri) => {
+        const i = data.length - 1 - ri;
+        return `<div class="admin-item">
+          <div class="admin-item-info">
+            <strong>${esc(p.title)}</strong>
+            <span>${esc(p.tags||'')}</span>
+          </div>
+          <button class="btn btn-danger" onclick="deleteProject(${i})">Remove</button>
+        </div>`;
+      }).join('');
+    } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
+  }
+
+  // ── ADD NOW ──
+  async function addNow() {
+    const date = document.getElementById('now-date').value || today();
+    const text = document.getElementById('now-text').value.trim();
+    if (!text) return;
+    const btn = document.getElementById('btn-add-now');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      const { data, sha } = await readJsonFile(FILE_NOW);
+      data.push({ date, text });
+      await ghPut(FILE_NOW, data, sha, `Add now entry: ${date}`);
+      document.getElementById('now-text').value = '';
+      document.getElementById('now-date').value = today();
+      showStatus('now-status', 'Saved to GitHub ✓', false);
+      loadAdminNow();
+    } catch(err) {
+      showStatus('now-status', err.message, true);
+    }
+    btn.disabled = false; btn.textContent = 'Save to GitHub';
+  }
+
+  // ── DELETE NOW ──
+  async function deleteNow(i) {
+    if (!confirm('Remove this entry?')) return;
+    try {
+      const { data, sha } = await readJsonFile(FILE_NOW);
+      data.splice(i, 1);
+      await ghPut(FILE_NOW, data, sha, 'Remove now entry');
+      showStatus('now-status', 'Removed ✓', false);
+      loadAdminNow();
+    } catch(err) { showStatus('now-status', err.message, true); }
+  }
+
+  // ── ADD PROJECT ──
+  async function addProject() {
+    const title = document.getElementById('proj-title').value.trim();
+    const desc  = document.getElementById('proj-desc').value.trim();
+    const url   = document.getElementById('proj-url').value.trim();
+    const tags  = document.getElementById('proj-tags').value.trim();
+    if (!title) return;
+    const btn = document.getElementById('btn-add-proj');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      const { data, sha } = await readJsonFile(FILE_PROJECTS);
+      data.push({ title, desc, url, tags });
+      await ghPut(FILE_PROJECTS, data, sha, `Add project: ${title}`);
+      document.getElementById('proj-title').value = '';
+      document.getElementById('proj-desc').value = '';
+      document.getElementById('proj-url').value = '';
+      document.getElementById('proj-tags').value = '';
+      showStatus('proj-status', 'Saved to GitHub ✓', false);
+      loadAdminProjects();
+    } catch(err) {
+      showStatus('proj-status', err.message, true);
+    }
+    btn.disabled = false; btn.textContent = 'Save to GitHub';
+  }
+
+  // ── DELETE PROJECT ──
+  async function deleteProject(i) {
+    if (!confirm('Remove this project?')) return;
+    try {
+      const { data, sha } = await readJsonFile(FILE_PROJECTS);
+      data.splice(i, 1);
+      await ghPut(FILE_PROJECTS, data, sha, 'Remove project');
+      showStatus('proj-status', 'Removed ✓', false);
+      loadAdminProjects();
+    } catch(err) { showStatus('proj-status', err.message, true); }
+  }
+
+  // ── ADMIN LOCK (triple-click) ──
+  let lockClicks = 0, lockTimer;
+  function clickLock() {
+    if (adminUnlocked) {
+      adminUnlocked = false;
+      document.getElementById('admin-lock').classList.remove('active');
+      if (currentPage === 'admin') go('home');
+      return;
+    }
+    lockClicks++;
+    clearTimeout(lockTimer);
+    lockTimer = setTimeout(() => { lockClicks = 0; }, 1500);
+    if (lockClicks >= 3) {
+      lockClicks = 0;
+      document.getElementById('admin-login').classList.add('open');
+      setTimeout(() => document.getElementById('admin-pass').focus(), 80);
+    }
+  }
+
+  function tryLogin() {
+    if (document.getElementById('admin-pass').value === ADMIN_PASSWORD) {
+      adminUnlocked = true;
+      document.getElementById('admin-login').classList.remove('open');
+      document.getElementById('admin-lock').classList.add('active');
+      document.getElementById('admin-pass').value = '';
+      document.getElementById('login-error').style.display = 'none';
+      go('admin');
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('admin-pass').value = '';
+      document.getElementById('admin-pass').focus();
+    }
+  }
+
+  function closeLogin() {
+    document.getElementById('admin-login').classList.remove('open');
+    document.getElementById('admin-pass').value = '';
+    document.getElementById('login-error').style.display = 'none';
+  }
+
+  // ── UTILS ──
+  function esc(s) {
+    if (!s) return '';
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function formatDate(d) {
+    if (!d) return '';
+    return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  }
+  function today() { return new Date().toISOString().split('T')[0]; }
+  function showStatus(id, msg, isErr, isInline) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'status-msg ' + (isErr ? 'err' : 'ok');
+    if (isInline) { el.style.display = 'inline'; }
+    setTimeout(() => { el.className = 'status-msg'; }, 4000);
+  }
+
+  // Init
+  document.getElementById('now-date').value = today();
+</script>
 </body>
 </html>
