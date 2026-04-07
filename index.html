@@ -581,19 +581,56 @@
     return res.json();
   }
 
+  function getCacheKey(path) {
+    return `kjm_cache_${path}`;
+  }
+
+  function getRecentWriteKey(path) {
+    return `kjm_recent_write_${path}`;
+  }
+
+  function saveLocalCache(path, data) {
+    try {
+      localStorage.setItem(getCacheKey(path), JSON.stringify(data));
+      localStorage.setItem(getRecentWriteKey(path), String(Date.now()));
+    } catch {}
+  }
+
+  function readLocalCache(path) {
+    try {
+      const cached = localStorage.getItem(getCacheKey(path));
+      return cached ? JSON.parse(cached) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function hasRecentWrite(path, maxAgeMs = 15000) {
+    try {
+      const ts = Number(localStorage.getItem(getRecentWriteKey(path)) || 0);
+      return ts && (Date.now() - ts) < maxAgeMs;
+    } catch {
+      return false;
+    }
+  }
+
   async function readJsonFile(path) {
-    const cacheKey = `kjm_cache_${path}`;
+    const cached = readLocalCache(path);
+
+    if (cached && hasRecentWrite(path)) {
+      return { data: cached, sha: null };
+    }
+
     try {
       const res = await fetch(RAW_BASE + path + '?t=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) throw new Error('RAW fetch failed');
       const data = await res.json();
-      localStorage.setItem(cacheKey, JSON.stringify(data));
+      try {
+        localStorage.setItem(getCacheKey(path), JSON.stringify(data));
+      } catch {}
       return { data, sha: null };
     } catch {
-      try {
-        const cached = localStorage.getItem(cacheKey);
-        if (cached) return { data: JSON.parse(cached), sha: null };
-      } catch {}
+      if (cached) return { data: cached, sha: null };
       return { data: [], sha: null };
     }
   }
@@ -932,6 +969,7 @@
       if (newIndex < 0 || newIndex >= data.length) return;
       [data[i], data[newIndex]] = [data[newIndex], data[i]];
       await ghPut(FILE_NOW, data, sha, 'Reorder now entries');
+      saveLocalCache(FILE_NOW, data);
       showStatus('now-status', 'Order updated ✓', false);
       await refreshViews();
     } catch (e) {
@@ -945,6 +983,7 @@
       const { data, sha } = await readJsonFile(FILE_NOW);
       data.splice(i, 1);
       await ghPut(FILE_NOW, data, sha, 'Remove now entry');
+      saveLocalCache(FILE_NOW, data);
       if (editingNowIndex === i) cancelNowEdit();
       else if (editingNowIndex !== null && i < editingNowIndex) editingNowIndex -= 1;
       showStatus('now-status', 'Removed ✓', false);
@@ -996,6 +1035,7 @@
       if (newIndex < 0 || newIndex >= data.length) return;
       [data[i], data[newIndex]] = [data[newIndex], data[i]];
       await ghPut(FILE_PROJECTS, data, sha, 'Reorder projects');
+      saveLocalCache(FILE_PROJECTS, data);
       showStatus('proj-status', 'Order updated ✓', false);
       await refreshViews();
     } catch (e) {
@@ -1009,6 +1049,7 @@
       const { data, sha } = await readJsonFile(FILE_PROJECTS);
       data.splice(i, 1);
       await ghPut(FILE_PROJECTS, data, sha, 'Remove project');
+      saveLocalCache(FILE_PROJECTS, data);
       if (editingProjectIndex === i) cancelProjectEdit();
       else if (editingProjectIndex !== null && i < editingProjectIndex) editingProjectIndex -= 1;
       showStatus('proj-status', 'Removed ✓', false);
