@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,23 +12,11 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0f0f0f;
-      --bg2: #161616;
-      --text: #d4d0c8;
-      --text-strong: #eae6dc;
-      --muted: #5a5a5a;
-      --border: #222;
-      --link: #d4d0c8;
-      --accent: #d4d0c8;
-    }
-
-    [data-theme="light"] {
-      --bg: #ffffff;
-      --bg2: #f7f7f5;
+      --bg: #faf9f7;
       --text: #2a2a2a;
       --text-strong: #111;
       --muted: #999;
-      --border: #e8e8e8;
+      --border: #e5e3de;
       --link: #2a2a2a;
     }
 
@@ -42,7 +30,6 @@
       line-height: 1.78;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.2s, color 0.2s;
     }
 
     .site {
@@ -55,6 +42,25 @@
     .page.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* WAVE */
+    .wave {
+      display: inline-block;
+      font-style: normal;
+      animation: wave 2.2s ease-in-out 0.4s 3;
+      transform-origin: 70% 80%;
+    }
+    @keyframes wave {
+      0%   { transform: rotate(0deg); }
+      10%  { transform: rotate(18deg); }
+      20%  { transform: rotate(-8deg); }
+      30%  { transform: rotate(18deg); }
+      40%  { transform: rotate(-4deg); }
+      50%  { transform: rotate(12deg); }
+      60%  { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* TYPE */
     h1 {
       font-family: 'Lora', serif;
       font-size: 1.55rem;
@@ -67,30 +73,22 @@
 
     h2 {
       font-family: 'Lora', serif;
-      font-size: 1.05rem;
+      font-size: 1.0rem;
       font-weight: 400;
-      margin: 2.25rem 0 0.65rem;
+      margin: 2rem 0 0.5rem;
       color: var(--text-strong);
-    }
-
-    h3 {
-      font-family: 'Lora', serif;
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: var(--text-strong);
-      margin-bottom: 0.75rem;
     }
 
     p { color: var(--text); margin-bottom: 1rem; font-weight: 300; }
     p:last-child { margin-bottom: 0; }
-
     strong { color: var(--text-strong); font-weight: 500; }
 
     .subtitle {
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       color: var(--muted);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
       font-weight: 300;
+      letter-spacing: 0.01em;
     }
 
     .muted { color: var(--muted); font-size: 0.88rem; }
@@ -99,7 +97,7 @@
       color: var(--link);
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: var(--border);
+      text-decoration-color: #ccc;
       transition: text-decoration-color 0.15s;
     }
     a:hover { text-decoration-color: var(--text); }
@@ -114,7 +112,7 @@
       cursor: pointer;
       transition: color 0.15s, border-color 0.15s;
     }
-    .back:hover { color: var(--text); border-bottom-color: var(--muted); }
+    .back:hover { color: var(--text); border-bottom-color: #aaa; }
 
     /* NAV */
     nav { margin-top: 1.5rem; font-size: 0.9rem; line-height: 2; }
@@ -129,144 +127,121 @@
     nav a:hover { border-bottom-color: var(--text); }
     nav .sep { color: var(--muted); user-select: none; }
 
-    /* THEME TOGGLE */
-    .theme-btn {
-      position: fixed;
-      top: 1.25rem;
-      right: 1.25rem;
-      background: none;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      padding: 4px;
-      transition: color 0.15s;
-      z-index: 50;
-      font-family: 'IBM Plex Sans', sans-serif;
+    /* ── CV ── */
+    .cv-intro { margin-bottom: 0.5rem; }
+    .cv-intro p { font-size: 0.93rem; line-height: 1.8; }
+
+    /* Year heading row */
+    .cv-year-heading {
+      font-family: 'Lora', serif;
+      font-size: 1.0rem;
+      font-weight: 400;
+      color: var(--text-strong);
+      margin: 2.25rem 0 0.5rem;
     }
-    .theme-btn:hover { color: var(--text); }
 
-    /* CV */
-    .cv-intro { margin-bottom: 2.5rem; }
-    .cv-intro p { font-size: 0.95rem; }
+    .cv-body-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
 
-    .cv-year-block { margin-bottom: 2rem; }
-    .cv-year-block h2 { margin-top: 1.75rem; margin-bottom: 0.5rem; }
-    .cv-year-body p { font-size: 0.9rem; color: var(--text); }
-    .cv-year-body a { font-size: 0.9rem; }
+    .cv-body-text a { font-size: inherit; }
 
-    /* NOW */
+    /* Collaborator avatars (like read.cv style) */
+    .cv-collabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0.65rem;
+    }
+
+    .cv-collab {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cv-collab:hover { background: #e0ddd7; color: var(--text-strong); text-decoration: none; border-color: #ccc; }
+
+    /* ── NOW ── */
     .now-intro { margin-bottom: 2rem; }
-    .now-intro p { font-size: 0.9rem; color: var(--muted); font-style: italic; }
+    .now-intro p { font-size: 0.9rem; color: var(--muted); }
 
     .now-block { margin-bottom: 3rem; }
 
     .now-block-header {
       font-family: 'Lora', serif;
-      font-size: 1.05rem;
+      font-size: 1.0rem;
       font-weight: 400;
       color: var(--text-strong);
       margin-bottom: 1rem;
     }
 
-    .now-media {
-      width: 100%;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      display: block;
-      max-height: 420px;
-      object-fit: cover;
-      background: var(--bg2);
-    }
-
-    .now-media-video {
-      width: 100%;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      display: block;
-      max-height: 420px;
-      background: #000;
-    }
+    .now-media { width: 100%; border-radius: 4px; margin-bottom: 1rem; display: block; max-height: 420px; object-fit: cover; background: var(--border); }
+    .now-media-video { width: 100%; border-radius: 4px; margin-bottom: 1rem; display: block; background: #000; }
 
     .now-bullets { list-style: none; padding: 0; }
     .now-bullets li {
       font-size: 0.92rem;
       color: var(--text);
-      padding: 0.3rem 0 0.3rem 1.25rem;
+      padding: 0.28rem 0 0.28rem 1.2rem;
       position: relative;
-      line-height: 1.7;
+      line-height: 1.72;
     }
-    .now-bullets li::before {
-      content: '·';
-      position: absolute;
-      left: 0;
-      color: var(--muted);
-    }
+    .now-bullets li::before { content: '·'; position: absolute; left: 0; color: var(--muted); }
 
-    /* PROJECTS */
+    /* ── PROJECTS ── */
     .project-card { border-top: 1px solid var(--border); padding: 1.25rem 0; }
     .project-card:last-child { border-bottom: 1px solid var(--border); }
-
-    .project-media {
-      width: 100%;
-      border-radius: 4px;
-      margin-bottom: 0.75rem;
-      max-height: 280px;
-      object-fit: cover;
-      display: block;
-      background: var(--bg2);
-    }
-
+    .project-media { width: 100%; border-radius: 4px; margin-bottom: 0.75rem; max-height: 280px; object-fit: cover; display: block; background: var(--border); }
     .project-title { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text-strong); }
-    .project-title a { text-decoration: none; border-bottom: 1px solid var(--border); color: var(--text-strong); }
+    .project-title a { text-decoration: none; border-bottom: 1px solid #ccc; color: var(--text-strong); }
     .project-title a:hover { border-bottom-color: var(--text); }
     .project-desc { font-size: 0.88rem; color: var(--text); margin: 0 0 0.5rem; }
     .project-tag { display: inline-block; font-size: 0.68rem; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; margin-right: 4px; }
 
-    /* SERVICES */
+    /* ── SERVICES ── */
     .service-row { border-top: 1px solid var(--border); padding: 1.1rem 0; }
     .service-row:last-child { border-bottom: 1px solid var(--border); }
     .service-name { font-weight: 500; font-size: 0.92rem; margin-bottom: 0.2rem; color: var(--text-strong); }
     .service-desc { font-size: 0.87rem; color: var(--text); margin: 0; }
 
-    /* EMPTY/LOADING */
+    /* STATES */
     .empty-state { font-size: 0.85rem; color: var(--muted); font-style: italic; padding: 0.75rem 0; }
     .loading { font-size: 0.85rem; color: var(--muted); padding: 0.75rem 0; }
 
-    /* ADMIN */
-    .admin-section { border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin-bottom: 1.5rem; background: var(--bg2); }
-    .admin-section > h3 { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 400; }
+    /* ── ADMIN ── */
+    .admin-section { border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin-bottom: 1.5rem; background: #fff; }
+    .admin-section > h3 { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 400; }
 
     .field { margin-bottom: 0.75rem; }
-    .field label { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .field input, .field textarea, .field select {
-      width: 100%;
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 300;
-      color: var(--text-strong);
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.5rem 0.65rem;
-      outline: none;
-      transition: border-color 0.15s;
-      resize: vertical;
+    .field label { display: block; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .field input, .field textarea {
+      width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; font-weight: 300;
+      color: var(--text-strong); background: #faf9f7; border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.5rem 0.65rem; outline: none; transition: border-color 0.15s; resize: vertical;
     }
-    .field input:focus, .field textarea:focus { border-color: #555; }
-
+    .field input:focus, .field textarea:focus { border-color: #aaa; background: #fff; }
     .field-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
 
     .media-preview { margin-top: 0.5rem; max-width: 200px; max-height: 140px; border-radius: 4px; display: none; }
 
-    .btn { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.03em; padding: 0.45rem 1rem; border-radius: 4px; border: 1px solid var(--text); background: var(--text-strong); color: var(--bg); cursor: pointer; transition: opacity 0.15s; }
-    .btn:hover { opacity: 0.85; }
+    .btn { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.03em; padding: 0.45rem 1rem; border-radius: 4px; border: 1px solid #2a2a2a; background: #2a2a2a; color: #faf9f7; cursor: pointer; transition: opacity 0.15s; }
+    .btn:hover { opacity: 0.8; }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
-    .btn-ghost:hover { border-color: var(--muted); opacity: 1; }
-    .btn-danger { border-color: #7a3030; background: transparent; color: #c06060; font-size: 0.72rem; padding: 0.3rem 0.7rem; }
-    .btn-danger:hover { background: #7a3030; color: #fdd; opacity: 1; }
+    .btn-ghost:hover { border-color: #aaa; opacity: 1; }
+    .btn-danger { border-color: #ddd; background: transparent; color: #c06060; font-size: 0.72rem; padding: 0.3rem 0.7rem; }
+    .btn-danger:hover { background: #c06060; color: #fff; opacity: 1; }
 
     .admin-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
     .admin-item:last-child { border-bottom: none; }
@@ -275,52 +250,43 @@
     .admin-item-info span { color: var(--muted); font-size: 0.78rem; }
 
     .status-msg { font-size: 0.8rem; margin-top: 0.6rem; padding: 0.4rem 0.75rem; border-radius: 4px; display: none; }
-    .status-msg.ok { background: rgba(40,90,40,0.25); color: #7ac07a; display: block; }
-    .status-msg.err { background: rgba(100,30,30,0.25); color: #c07a7a; display: block; }
+    .status-msg.ok { background: #f0faf0; color: #3a8a3a; display: block; }
+    .status-msg.err { background: #fdf0f0; color: #a33; display: block; }
 
-    /* LOCK */
-    .admin-lock { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border-radius: 50%; background: var(--bg2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; color: var(--muted); transition: background 0.15s, color 0.15s; z-index: 100; user-select: none; }
+    .admin-lock { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border-radius: 50%; background: #f0eeea; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; color: var(--muted); transition: background 0.15s, color 0.15s; z-index: 100; user-select: none; }
     .admin-lock:hover { color: var(--text); }
     .admin-lock.active { background: var(--text); color: var(--bg); }
 
-    /* LOGIN */
-    .admin-login { position: fixed; inset: 0; background: rgba(10,10,10,0.92); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(6px); }
+    .admin-login { position: fixed; inset: 0; background: rgba(250,249,247,0.94); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(6px); }
     .admin-login.open { display: flex; }
-    .login-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; width: 300px; }
+    .login-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; width: 300px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
     .login-box h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; margin-bottom: 1.25rem; color: var(--text-strong); }
     .login-error { font-size: 0.78rem; color: #c06060; margin-top: 0.5rem; display: none; }
-
     .token-note { font-size: 0.73rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.55; }
 
-    /* BULLET TEXTAREA helper */
     .bullet-fields { display: flex; flex-direction: column; gap: 0.5rem; }
     .bullet-row { display: flex; gap: 0.5rem; align-items: flex-start; }
     .bullet-row textarea { flex: 1; min-height: 52px; }
     .bullet-row .rm-btn { background: none; border: 1px solid var(--border); color: var(--muted); border-radius: 4px; padding: 0 0.5rem; cursor: pointer; font-size: 1rem; height: 36px; flex-shrink: 0; transition: color 0.15s; }
-    .bullet-row .rm-btn:hover { color: #c06060; border-color: #7a3030; }
-    .add-bullet-btn { font-size: 0.78rem; color: var(--muted); background: none; border: 1px dashed var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s; font-family: 'IBM Plex Sans', sans-serif; }
-    .add-bullet-btn:hover { color: var(--text); border-color: var(--muted); }
+    .bullet-row .rm-btn:hover { color: #c06060; border-color: #ddd; }
+    .add-bullet-btn { font-size: 0.78rem; color: var(--muted); background: none; border: 1px dashed var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s; font-family: 'IBM Plex Sans', sans-serif; margin-top: 0.5rem; }
+    .add-bullet-btn:hover { color: var(--text); border-color: #aaa; }
   </style>
 </head>
 <body>
-
-<button class="theme-btn" onclick="toggleTheme()" id="theme-btn">light</button>
-
 <div class="site">
 
   <!-- HOME -->
   <div class="page active" id="page-home">
-    <h1>Karl Jude M.</h1>
+    <h1>Hi, I'm Karl. <span class="wave">👋</span></h1>
     <p style="margin-top:1rem;">
       Creative &amp; Marketing Lead based in Pampanga, PH.
-      Currently, I work on brand identity, funnels, and creative direction at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a>.
-      Before that, I spent a few years freelancing with startups across Pampanga — doing everything from social media to graphic design to photography.
-      Before <em>that</em>, I was a Tech CSR at Sutherland in Clark.
-      Originally trained as an IT specialist.
+      I currently work at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> — handling brand identity, funnels, and creative direction as their all-in-one marketing specialist.
+      My path here wasn't linear: I started as an IT graduate, moved into tech support at Sutherland in Clark, then spent several years freelancing with startups across Pampanga doing social media, graphic design, and photography.
     </p>
     <p>
-      Lately I've been deep into <strong>Marketing Automation</strong> — building with n8n, Zapier, and GoHighLevel.
-      I'm pursuing this seriously right now. The intersection of creative work and systems thinking is where I want to be.
+      Lately I've been serious about <strong>Marketing Automation</strong> — building with n8n, Zapier, and GoHighLevel to close the gap between getting a lead and actually securing a client.
+      That's what I'm pursuing right now.
     </p>
     <nav>
       <a onclick="go('cv')">CV</a><span class="sep"> · </span><a onclick="go('projects')">Projects</a><span class="sep"> · </span><a onclick="go('now')">Now</a><span class="sep"> · </span><a onclick="go('services')">My services</a><span class="sep"> · </span><a href="https://github.com/krljde" target="_blank" rel="noopener">Github↗</a>
@@ -336,68 +302,35 @@
     <div class="cv-intro">
       <p>
         I'm a creative and marketing lead based in Pampanga, PH.
-        Currently, I work on brand, funnels, and creative systems at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a>.
-        Before that, I freelanced with startups across Pampanga — doing SMM, graphic design, photography, and cinematography.
-        Before that, a Tech CSR at Sutherland in Clark.
+        I currently work at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> — brand, funnels, and creative systems.
+        My path here went: IT graduate → tech support → freelancer → in-house lead.
         Originally trained as an IT specialist and now pursuing Automation.
       </p>
     </div>
 
-    <div class="cv-year-block">
-      <h2>Present</h2>
-      <div class="cv-year-body">
-        <p>Still working as Creative &amp; Marketing Lead at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a>. Also pursuing side projects in Automation — building workflows with n8n and Zapier to see how far I can take it.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">Present</div>
+    <p class="cv-body-text">Still working as Creative &amp; Marketing Lead at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a>. Pursuing side projects in Automation — building with n8n and Zapier to see how far automated workflows can go for small businesses.</p>
 
-    <div class="cv-year-block">
-      <h2>2025</h2>
-      <div class="cv-year-body">
-        <p>Studied sales process and media buying. Started taking paid traffic more seriously alongside organic strategy.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">2025</div>
+    <p class="cv-body-text">Studied sales process and media buying. Started taking paid traffic seriously alongside organic strategy.</p>
 
-    <div class="cv-year-block">
-      <h2>2024</h2>
-      <div class="cv-year-body">
-        <p>Joined <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> as their Marketing Lead and Creative Lead — and GHL expert. First time working inside a team after years of freelancing. Responsible for brand identity, enrollment KPIs, and every creative touchpoint from stationery to digital funnels.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">2024</div>
+    <p class="cv-body-text">Joined <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> as their Marketing Lead, Creative Lead, and GHL expert. First full-time in-house role after years of freelancing. Responsible for brand identity, enrollment KPIs, and every creative touchpoint from stationery to digital funnels.</p>
 
-    <div class="cv-year-block">
-      <h2>2022</h2>
-      <div class="cv-year-body">
-        <p>Started pursuing graphic design more seriously while freelancing, and started turning photography and cinematography — which had been a hobby since 2019 — into actual client work.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">2022</div>
+    <p class="cv-body-text">Began pursuing graphic design seriously while still freelancing. Started converting photography and cinematography — a hobby since 2019 — into real client work.</p>
 
-    <div class="cv-year-block">
-      <h2>2021</h2>
-      <div class="cv-year-body">
-        <p>Became a freelance Social Media Manager. Grew one client from zero to 7,000+ followers and converted 80% of that audience into recurring monthly clients — with zero ad spend. That result is still the one I'm most proud of.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">2021</div>
+    <p class="cv-body-text">Went full freelance as a Social Media Manager. Grew one client from zero to 7,000+ followers and converted 80% of that audience into recurring monthly clients — zero ad spend. That result is still the one I'm most proud of.</p>
 
-    <div class="cv-year-block">
-      <h2>2020</h2>
-      <div class="cv-year-body">
-        <p>Worked as a Tech Customer Service Representative at Sutherland in Clark. Fast-paced, taught me a lot about systems, troubleshooting, and talking to people.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">2020</div>
+    <p class="cv-body-text">Worked as a Tech Customer Service Representative at Sutherland, Clark. Fast-paced BPO environment — taught me a lot about systems, troubleshooting, and staying calm with people.</p>
 
-    <div class="cv-year-block">
-      <h2>2019</h2>
-      <div class="cv-year-body">
-        <p>Took a gap year. The pandemic made job hunting nearly impossible anyway. Used the time to get seriously into photography and cinematography — what started as a hobby started to feel like something more.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">2019</div>
+    <p class="cv-body-text">Took a gap year. The pandemic made job hunting nearly impossible, so I used the time to get serious about photography and cinematography. What started as a hobby started to feel like a direction.</p>
 
-    <div class="cv-year-block">
-      <h2>2018</h2>
-      <div class="cv-year-body">
-        <p>Graduated with a BS in Information Technology from STI College. Completed an internship at an IT company and worked on personal projects throughout. Didn't know it at the time, but the IT foundation would end up being more useful than I expected — just not in the way I planned.</p>
-      </div>
-    </div>
+    <div class="cv-year-heading">2018</div>
+    <p class="cv-body-text">Graduated with a BS in Information Technology from STI College. Completed an internship at an IT company and worked on personal projects throughout. Didn't know it then, but the IT foundation would end up being more useful than expected — just not in the way I planned.</p>
   </div>
 
   <!-- PROJECTS -->
@@ -422,19 +355,19 @@
   <div class="page" id="page-services">
     <span class="back" onclick="go('home')">← Karl Jude M.</span>
     <h1>My services</h1>
-    <p style="margin-bottom:1.75rem;">I work with businesses that need both sides of the equation — the creative work that makes people notice you, and the systems that make sure you don't lose them after.</p>
+    <p style="margin-bottom:1.75rem;">I work with businesses that need both sides — the creative work that makes people notice you, and the systems that make sure you don't lose them after.</p>
     <div>
       <div class="service-row">
         <div class="service-name">Creative Direction</div>
-        <p class="service-desc">Brand identity, art direction, visual strategy. I figure out how your brand should look and feel, then execute it consistently across everything.</p>
+        <p class="service-desc">Brand identity, art direction, visual strategy. I figure out how your brand should look and feel, then make sure it's consistent across everything.</p>
       </div>
       <div class="service-row">
         <div class="service-name">Design — Digital &amp; Physical</div>
-        <p class="service-desc">Social media assets, business stationery, marketing collateral. Things that look good and actually work.</p>
+        <p class="service-desc">Social assets, stationery, marketing collateral. Things that look good and actually do their job.</p>
       </div>
       <div class="service-row">
         <div class="service-name">Growth Marketing &amp; Funnels</div>
-        <p class="service-desc">Organic strategy, media buying, and GoHighLevel funnel builds. I don't just post content — I build conversion systems designed to turn attention into clients.</p>
+        <p class="service-desc">Organic strategy, media buying, and GoHighLevel funnel builds. Not just content — conversion systems built to turn attention into clients.</p>
       </div>
       <div class="service-row">
         <div class="service-name">Marketing Automation</div>
@@ -442,7 +375,7 @@
       </div>
       <div class="service-row">
         <div class="service-name">Photography &amp; Cinematography</div>
-        <p class="service-desc">Events, brand shoots, short-form video. This started as a hobby and became something I do properly. Studio work lives at <a href="https://studio.karljde.com" target="_blank" rel="noopener">studio.karljde.com↗</a></p>
+        <p class="service-desc">Events, brand shoots, short-form video. Started as a hobby, became something I do properly. Studio work at <a href="https://studio.karljde.com" target="_blank" rel="noopener">studio.karljde.com↗</a></p>
       </div>
     </div>
     <p style="margin-top:2rem;font-size:0.88rem;">If any of this sounds useful — <a href="mailto:karljudemagbanlag@gmail.com">karljudemagbanlag@gmail.com</a></p>
@@ -453,7 +386,7 @@
     <span class="back" onclick="go('home')">← Karl Jude M.</span>
     <h1>Admin</h1>
 
-    <div class="admin-section" id="token-section">
+    <div class="admin-section">
       <h3>GitHub Token</h3>
       <div id="token-status" style="font-size:0.82rem;color:var(--muted);margin-bottom:0.75rem;"></div>
       <div class="field">
@@ -467,7 +400,6 @@
       <p class="token-note">Stored only in this browser's localStorage. Only sent to api.github.com.</p>
     </div>
 
-    <!-- ADD NOW ENTRY -->
     <div class="admin-section">
       <h3>Add Now entry</h3>
       <div class="field">
@@ -477,12 +409,12 @@
       <div class="field">
         <label>Bullet points</label>
         <div class="bullet-fields" id="now-bullets-input"></div>
-        <button class="add-bullet-btn" onclick="addBulletField('now-bullets-input')" style="margin-top:0.5rem;">+ Add bullet</button>
+        <button class="add-bullet-btn" onclick="addBulletField('now-bullets-input')">+ Add bullet</button>
       </div>
       <div class="field">
         <label>Photo or Video (optional)</label>
         <input type="file" id="now-media-file" accept="image/*,video/*" onchange="previewMedia(this,'now-media-preview')"/>
-        <p class="field-hint">Uploaded to your repo under <code>media/</code>. Images recommended under 5MB.</p>
+        <p class="field-hint">Uploaded to your repo under <code>media/</code>. Keep images under 5MB.</p>
         <img id="now-media-preview" class="media-preview" alt="preview"/>
       </div>
       <button class="btn" id="btn-add-now" onclick="addNow()">Save to GitHub</button>
@@ -494,7 +426,6 @@
       <div id="admin-now-list"><div class="loading">Loading…</div></div>
     </div>
 
-    <!-- ADD PROJECT -->
     <div class="admin-section">
       <h3>Add project</h3>
       <div class="field">
@@ -531,7 +462,7 @@
 
 </div>
 
-<!-- Login overlay -->
+<!-- Login -->
 <div class="admin-login" id="admin-login">
   <div class="login-box">
     <h3>Admin</h3>
@@ -550,8 +481,7 @@
 <div class="admin-lock" id="admin-lock" onclick="clickLock()" title="Admin">⚙</div>
 
 <script>
-  // ── CONFIG ──
-  const ADMIN_PASSWORD = 'karl2025admin'; // Change this!
+  const ADMIN_PASSWORD = 'karl2025admin';
   const GITHUB_OWNER   = 'krljde';
   const GITHUB_REPO    = 'krljde.github.io';
   const FILE_NOW       = 'data/now.json';
@@ -562,21 +492,7 @@
   let adminUnlocked = false;
   let currentPage = 'home';
 
-  // ── THEME ──
-  function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    document.getElementById('theme-btn').textContent = isDark ? 'dark' : 'light';
-    localStorage.setItem('kjm_theme', next);
-  }
-  (function initTheme() {
-    const saved = localStorage.getItem('kjm_theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('theme-btn').textContent = saved === 'dark' ? 'light' : 'dark';
-  })();
-
-  // ── TOKEN ──
+  // TOKEN
   function getToken() { return localStorage.getItem('kjm_gh_token') || ''; }
   function saveToken() {
     const t = document.getElementById('token-input').value.trim();
@@ -591,7 +507,7 @@
     if (el) el.textContent = getToken() ? '✓ Token saved.' : 'No token — add one to enable saving.';
   }
 
-  // ── GITHUB API ──
+  // GITHUB API
   async function ghGet(path) {
     const res = await fetch(API_BASE + path + '?ref=main&t=' + Date.now(), {
       headers: { 'Accept': 'application/vnd.github.v3+json' }
@@ -636,7 +552,6 @@
     return { data: JSON.parse(decoded), sha: file.sha };
   }
 
-  // ── UPLOAD MEDIA ──
   async function uploadMedia(fileInput, statusId) {
     const file = fileInput.files[0];
     if (!file) return null;
@@ -645,7 +560,7 @@
     const ext = file.name.split('.').pop();
     const filename = `media/${Date.now()}.${ext}`;
     const existing = await ghGet(filename).catch(() => null);
-    await ghPutBinary(filename, base64, existing?.sha || null, `Upload media: ${filename}`);
+    await ghPutBinary(filename, base64, existing?.sha || null, `Upload media`);
     return filename;
   }
 
@@ -658,7 +573,7 @@
     });
   }
 
-  // ── ROUTER ──
+  // ROUTER
   function go(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const t = document.getElementById('page-' + page);
@@ -668,7 +583,7 @@
     if (page === 'admin') { updateTokenStatus(); loadAdminNow(); loadAdminProjects(); initBulletFields(); }
   }
 
-  // ── RENDER NOW ──
+  // RENDER NOW
   async function renderNow() {
     const el = document.getElementById('now-list');
     el.innerHTML = '<div class="loading">Loading…</div>';
@@ -679,16 +594,12 @@
         const mediaHtml = e.media ? renderMediaTag(e.media, 'now-media') : '';
         const bullets = (e.bullets || []).filter(b => b.trim());
         const bulletsHtml = bullets.length ? `<ul class="now-bullets">${bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>` : '';
-        return `<div class="now-block">
-          <div class="now-block-header">${esc(e.heading)}</div>
-          ${mediaHtml}
-          ${bulletsHtml}
-        </div>`;
+        return `<div class="now-block"><div class="now-block-header">${esc(e.heading)}</div>${mediaHtml}${bulletsHtml}</div>`;
       }).join('');
-    } catch(e) { el.innerHTML = '<p class="empty-state">Couldn\'t load entries.</p>'; }
+    } catch { el.innerHTML = '<p class="empty-state">Couldn\'t load entries.</p>'; }
   }
 
-  // ── RENDER PROJECTS ──
+  // RENDER PROJECTS
   async function renderProjects() {
     const el = document.getElementById('projects-list');
     el.innerHTML = '<div class="loading">Loading…</div>';
@@ -698,14 +609,9 @@
       el.innerHTML = data.slice().reverse().map(p => {
         const mediaHtml = p.media ? renderMediaTag(p.media, 'project-media') : '';
         const tags = (p.tags||'').split(',').filter(t=>t.trim()).map(t=>`<span class="project-tag">${esc(t.trim())}</span>`).join('');
-        return `<div class="project-card">
-          ${mediaHtml}
-          <div class="project-title">${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}↗</a>` : esc(p.title)}</div>
-          <p class="project-desc">${esc(p.desc)}</p>
-          ${tags}
-        </div>`;
+        return `<div class="project-card">${mediaHtml}<div class="project-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}↗</a>`:esc(p.title)}</div><p class="project-desc">${esc(p.desc)}</p>${tags}</div>`;
       }).join('');
-    } catch(e) { el.innerHTML = '<p class="empty-state">Couldn\'t load projects.</p>'; }
+    } catch { el.innerHTML = '<p class="empty-state">Couldn\'t load projects.</p>'; }
   }
 
   function renderMediaTag(mediaPath, cssClass) {
@@ -715,7 +621,7 @@
     return `<img class="${cssClass}" src="${url}" alt="" loading="lazy"/>`;
   }
 
-  // ── ADMIN: LOAD NOW ──
+  // ADMIN LOAD
   async function loadAdminNow() {
     const el = document.getElementById('admin-now-list');
     el.innerHTML = '<div class="loading">Loading…</div>';
@@ -724,18 +630,11 @@
       if (!data.length) { el.innerHTML = '<div class="empty-state">No entries yet.</div>'; return; }
       el.innerHTML = data.slice().reverse().map((e, ri) => {
         const i = data.length - 1 - ri;
-        return `<div class="admin-item">
-          <div class="admin-item-info">
-            <strong>${esc(e.heading)}</strong>
-            <span>${(e.bullets||[]).length} bullet${(e.bullets||[]).length!==1?'s':''}${e.media?' · has media':''}</span>
-          </div>
-          <button class="btn btn-danger" onclick="deleteNow(${i})">Remove</button>
-        </div>`;
+        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(e.heading)}</strong><span>${(e.bullets||[]).length} bullet(s)${e.media?' · has media':''}</span></div><button class="btn btn-danger" onclick="deleteNow(${i})">Remove</button></div>`;
       }).join('');
     } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
   }
 
-  // ── ADMIN: LOAD PROJECTS ──
   async function loadAdminProjects() {
     const el = document.getElementById('admin-projects-list');
     el.innerHTML = '<div class="loading">Loading…</div>';
@@ -744,23 +643,16 @@
       if (!data.length) { el.innerHTML = '<div class="empty-state">No projects yet.</div>'; return; }
       el.innerHTML = data.slice().reverse().map((p, ri) => {
         const i = data.length - 1 - ri;
-        return `<div class="admin-item">
-          <div class="admin-item-info">
-            <strong>${esc(p.title)}</strong>
-            <span>${esc(p.tags||'')}${p.media?' · has media':''}</span>
-          </div>
-          <button class="btn btn-danger" onclick="deleteProject(${i})">Remove</button>
-        </div>`;
+        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(p.title)}</strong><span>${esc(p.tags||'')}${p.media?' · has media':''}</span></div><button class="btn btn-danger" onclick="deleteProject(${i})">Remove</button></div>`;
       }).join('');
     } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
   }
 
-  // ── BULLET FIELDS ──
+  // BULLET FIELDS
   function initBulletFields() {
     const c = document.getElementById('now-bullets-input');
     if (c && !c.children.length) addBulletField('now-bullets-input');
   }
-
   function addBulletField(containerId) {
     const c = document.getElementById(containerId);
     const row = document.createElement('div');
@@ -768,13 +660,11 @@
     row.innerHTML = `<textarea placeholder="What's going on…" rows="2"></textarea><button class="rm-btn" onclick="this.parentElement.remove()">×</button>`;
     c.appendChild(row);
   }
-
   function getBullets(containerId) {
-    return Array.from(document.querySelectorAll(`#${containerId} textarea`))
-      .map(t => t.value.trim()).filter(Boolean);
+    return Array.from(document.querySelectorAll(`#${containerId} textarea`)).map(t=>t.value.trim()).filter(Boolean);
   }
 
-  // ── ADD NOW ──
+  // ADD / DELETE NOW
   async function addNow() {
     const heading = document.getElementById('now-heading').value.trim();
     const bullets = getBullets('now-bullets-input');
@@ -783,15 +673,15 @@
     btn.disabled = true; btn.textContent = 'Saving…';
     try {
       let media = null;
-      const fileInput = document.getElementById('now-media-file');
-      if (fileInput.files[0]) media = await uploadMedia(fileInput, 'now-status');
+      const fi = document.getElementById('now-media-file');
+      if (fi.files[0]) media = await uploadMedia(fi, 'now-status');
       const { data, sha } = await readJsonFile(FILE_NOW);
       data.push({ heading, bullets, media });
       await ghPut(FILE_NOW, data, sha, `Add now entry: ${heading}`);
       document.getElementById('now-heading').value = '';
       document.getElementById('now-bullets-input').innerHTML = '';
       addBulletField('now-bullets-input');
-      fileInput.value = '';
+      fi.value = '';
       document.getElementById('now-media-preview').style.display = 'none';
       showStatus('now-status', 'Saved ✓', false);
       loadAdminNow();
@@ -799,7 +689,6 @@
     btn.disabled = false; btn.textContent = 'Save to GitHub';
   }
 
-  // ── DELETE NOW ──
   async function deleteNow(i) {
     if (!confirm('Remove this entry?')) return;
     try {
@@ -811,7 +700,7 @@
     } catch(e) { showStatus('now-status', e.message, true); }
   }
 
-  // ── ADD PROJECT ──
+  // ADD / DELETE PROJECT
   async function addProject() {
     const title = document.getElementById('proj-title').value.trim();
     const desc  = document.getElementById('proj-desc').value.trim();
@@ -822,13 +711,13 @@
     btn.disabled = true; btn.textContent = 'Saving…';
     try {
       let media = null;
-      const fileInput = document.getElementById('proj-media-file');
-      if (fileInput.files[0]) media = await uploadMedia(fileInput, 'proj-status');
+      const fi = document.getElementById('proj-media-file');
+      if (fi.files[0]) media = await uploadMedia(fi, 'proj-status');
       const { data, sha } = await readJsonFile(FILE_PROJECTS);
       data.push({ title, desc, url, tags, media });
       await ghPut(FILE_PROJECTS, data, sha, `Add project: ${title}`);
-      ['proj-title','proj-desc','proj-url','proj-tags'].forEach(id => document.getElementById(id).value = '');
-      fileInput.value = '';
+      ['proj-title','proj-desc','proj-url','proj-tags'].forEach(id=>document.getElementById(id).value='');
+      fi.value = '';
       document.getElementById('proj-media-preview').style.display = 'none';
       showStatus('proj-status', 'Saved ✓', false);
       loadAdminProjects();
@@ -836,7 +725,6 @@
     btn.disabled = false; btn.textContent = 'Save to GitHub';
   }
 
-  // ── DELETE PROJECT ──
   async function deleteProject(i) {
     if (!confirm('Remove this project?')) return;
     try {
@@ -848,21 +736,17 @@
     } catch(e) { showStatus('proj-status', e.message, true); }
   }
 
-  // ── MEDIA PREVIEW ──
+  // MEDIA PREVIEW
   function previewMedia(input, previewId) {
     const preview = document.getElementById(previewId);
     const file = input.files[0];
-    if (!file) { preview.style.display = 'none'; return; }
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
-      reader.readAsDataURL(file);
-    } else {
-      preview.style.display = 'none';
-    }
+    if (!file || !file.type.startsWith('image/')) { preview.style.display = 'none'; return; }
+    const reader = new FileReader();
+    reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
+    reader.readAsDataURL(file);
   }
 
-  // ── ADMIN LOCK ──
+  // ADMIN LOCK
   let lockClicks = 0, lockTimer;
   function clickLock() {
     if (adminUnlocked) {
@@ -901,7 +785,7 @@
     document.getElementById('login-error').style.display = 'none';
   }
 
-  // ── UTILS ──
+  // UTILS
   function esc(s) {
     if (!s) return '';
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
