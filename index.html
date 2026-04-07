@@ -7,17 +7,18 @@
   <title>Karl Jude M.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #faf9f7;
-      --text: #2a2a2a;
-      --text-strong: #111;
-      --muted: #999;
-      --border: #e5e3de;
-      --link: #2a2a2a;
+      --bg: #1e1e1e;
+      --text: #d4d4d4;
+      --text-strong: #ffffff;
+      --muted: #6b6b6b;
+      --border: #2e2e2e;
+      --link: #d97841;
+      --link-hover: #e8924e;
     }
 
     html { scroll-behavior: smooth; }
@@ -25,17 +26,17 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'IBM Plex Sans', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 15px;
-      line-height: 1.78;
-      font-weight: 300;
+      line-height: 1.7;
+      font-weight: 400;
       -webkit-font-smoothing: antialiased;
     }
 
     .site {
-      max-width: 560px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 64px 24px 120px;
+      padding: 80px 24px 120px;
     }
 
     .page { display: none; animation: fadeIn 0.2s ease; }
@@ -62,32 +63,31 @@
 
     /* TYPE */
     h1 {
-      font-family: 'Lora', serif;
-      font-size: 1.55rem;
-      font-weight: 400;
-      line-height: 1.3;
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.01em;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 0.15rem;
       color: var(--text-strong);
     }
 
     h2 {
-      font-family: 'Lora', serif;
-      font-size: 1.0rem;
-      font-weight: 400;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
       margin: 2rem 0 0.5rem;
       color: var(--text-strong);
     }
 
-    p { color: var(--text); margin-bottom: 1rem; font-weight: 300; }
+    p { color: var(--text); margin-bottom: 1rem; font-weight: 400; }
     p:last-child { margin-bottom: 0; }
     strong { color: var(--text-strong); font-weight: 500; }
 
     .subtitle {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--muted);
       margin-bottom: 1.75rem;
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: 0.01em;
     }
 
@@ -97,10 +97,10 @@
       color: var(--link);
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: #ccc;
-      transition: text-decoration-color 0.15s;
+      text-decoration-color: rgba(217, 120, 65, 0.4);
+      transition: color 0.15s, text-decoration-color 0.15s;
     }
-    a:hover { text-decoration-color: var(--text); }
+    a:hover { color: var(--link-hover); text-decoration-color: var(--link-hover); }
 
     .back {
       display: inline-block;
@@ -112,7 +112,7 @@
       cursor: pointer;
       transition: color 0.15s, border-color 0.15s;
     }
-    .back:hover { color: var(--text); border-bottom-color: #aaa; }
+    .back:hover { color: var(--text); border-bottom-color: #555; }
 
     /* NAV */
     nav { margin-top: 1.5rem; font-size: 0.9rem; line-height: 2; }
@@ -121,10 +121,10 @@
       text-decoration: none;
       border-bottom: 1px solid transparent;
       padding-bottom: 1px;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s, color 0.15s;
       cursor: pointer;
     }
-    nav a:hover { border-bottom-color: var(--text); }
+    nav a:hover { color: var(--link-hover); border-bottom-color: var(--link-hover); }
     nav .sep { color: var(--muted); user-select: none; }
 
     /* ── CV ── */
@@ -133,15 +133,15 @@
 
     /* Year heading row */
     .cv-year-heading {
-      font-family: 'Lora', serif;
-      font-size: 1.0rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
       font-weight: 400;
-      color: var(--text-strong);
+      color: var(--muted);
       margin: 2.25rem 0 0.5rem;
     }
 
     .cv-body-text {
-      font-size: 0.9rem;
+      font-size: 0.93rem;
       color: var(--text);
       line-height: 1.8;
       margin-bottom: 0;
@@ -167,10 +167,10 @@
       color: var(--muted);
       text-decoration: none;
       transition: background 0.15s, color 0.15s;
-      border: 1px solid var(--border);
+      border: 1px solid #3a3a3a;
       flex-shrink: 0;
     }
-    .cv-collab:hover { background: #e0ddd7; color: var(--text-strong); text-decoration: none; border-color: #ccc; }
+    .cv-collab:hover { background: #3a3a3a; color: var(--text-strong); text-decoration: none; border-color: #555; }
 
     /* ── NOW ── */
     .now-intro { margin-bottom: 2rem; }
@@ -179,15 +179,15 @@
     .now-block { margin-bottom: 3rem; }
 
     .now-block-header {
-      font-family: 'Lora', serif;
-      font-size: 1.0rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
       font-weight: 400;
-      color: var(--text-strong);
+      color: var(--muted);
       margin-bottom: 1rem;
     }
 
-    .now-media { width: 100%; border-radius: 4px; margin-bottom: 1rem; display: block; max-height: 420px; object-fit: cover; background: var(--border); }
-    .now-media-video { width: 100%; border-radius: 4px; margin-bottom: 1rem; display: block; background: #000; }
+    .now-media { width: 100%; border-radius: 6px; margin-bottom: 1rem; display: block; max-height: 420px; object-fit: cover; background: var(--border); }
+    .now-media-video { width: 100%; border-radius: 6px; margin-bottom: 1rem; display: block; background: #000; }
 
     .now-bullets { list-style: none; padding: 0; }
     .now-bullets li {
@@ -197,15 +197,15 @@
       position: relative;
       line-height: 1.72;
     }
-    .now-bullets li::before { content: '·'; position: absolute; left: 0; color: var(--muted); }
+    .now-bullets li::before { content: '-'; position: absolute; left: 0; color: var(--muted); }
 
     /* ── PROJECTS ── */
     .project-card { border-top: 1px solid var(--border); padding: 1.25rem 0; }
     .project-card:last-child { border-bottom: 1px solid var(--border); }
-    .project-media { width: 100%; border-radius: 4px; margin-bottom: 0.75rem; max-height: 280px; object-fit: cover; display: block; background: var(--border); }
+    .project-media { width: 100%; border-radius: 6px; margin-bottom: 0.75rem; max-height: 280px; object-fit: cover; display: block; background: var(--border); }
     .project-title { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text-strong); }
-    .project-title a { text-decoration: none; border-bottom: 1px solid #ccc; color: var(--text-strong); }
-    .project-title a:hover { border-bottom-color: var(--text); }
+    .project-title a { text-decoration: none; border-bottom: 1px solid #444; color: var(--link); }
+    .project-title a:hover { border-bottom-color: var(--link); color: var(--link-hover); }
     .project-desc { font-size: 0.88rem; color: var(--text); margin: 0 0 0.5rem; }
     .project-tag { display: inline-block; font-size: 0.68rem; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; margin-right: 4px; }
 
@@ -220,27 +220,27 @@
     .loading { font-size: 0.85rem; color: var(--muted); padding: 0.75rem 0; }
 
     /* ── ADMIN ── */
-    .admin-section { border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin-bottom: 1.5rem; background: #fff; }
-    .admin-section > h3 { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 400; }
+    .admin-section { border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin-bottom: 1.5rem; background: #262626; }
+    .admin-section > h3 { font-family: 'Inter', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 400; }
 
     .field { margin-bottom: 0.75rem; }
     .field label { display: block; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
     .field input, .field textarea {
-      width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; font-weight: 300;
-      color: var(--text-strong); background: #faf9f7; border: 1px solid var(--border); border-radius: 4px;
+      width: 100%; font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 400;
+      color: var(--text-strong); background: #1e1e1e; border: 1px solid var(--border); border-radius: 4px;
       padding: 0.5rem 0.65rem; outline: none; transition: border-color 0.15s; resize: vertical;
     }
-    .field input:focus, .field textarea:focus { border-color: #aaa; background: #fff; }
+    .field input:focus, .field textarea:focus { border-color: #555; background: #262626; }
     .field-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
 
     .media-preview { margin-top: 0.5rem; max-width: 200px; max-height: 140px; border-radius: 4px; display: none; }
 
-    .btn { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.03em; padding: 0.45rem 1rem; border-radius: 4px; border: 1px solid #2a2a2a; background: #2a2a2a; color: #faf9f7; cursor: pointer; transition: opacity 0.15s; }
-    .btn:hover { opacity: 0.8; }
+    .btn { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.03em; padding: 0.45rem 1rem; border-radius: 4px; border: 1px solid #d97841; background: #d97841; color: #fff; cursor: pointer; transition: opacity 0.15s; }
+    .btn:hover { opacity: 0.85; }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
-    .btn-ghost:hover { border-color: #aaa; opacity: 1; }
-    .btn-danger { border-color: #ddd; background: transparent; color: #c06060; font-size: 0.72rem; padding: 0.3rem 0.7rem; }
+    .btn-ghost:hover { border-color: #555; opacity: 1; }
+    .btn-danger { border-color: #3a3a3a; background: transparent; color: #c06060; font-size: 0.72rem; padding: 0.3rem 0.7rem; }
     .btn-danger:hover { background: #c06060; color: #fff; opacity: 1; }
 
     .admin-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
@@ -250,27 +250,27 @@
     .admin-item-info span { color: var(--muted); font-size: 0.78rem; }
 
     .status-msg { font-size: 0.8rem; margin-top: 0.6rem; padding: 0.4rem 0.75rem; border-radius: 4px; display: none; }
-    .status-msg.ok { background: #f0faf0; color: #3a8a3a; display: block; }
-    .status-msg.err { background: #fdf0f0; color: #a33; display: block; }
+    .status-msg.ok { background: #1a2e1a; color: #5aaa5a; display: block; }
+    .status-msg.err { background: #2e1a1a; color: #cc6666; display: block; }
 
-    .admin-lock { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border-radius: 50%; background: #f0eeea; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; color: var(--muted); transition: background 0.15s, color 0.15s; z-index: 100; user-select: none; }
+    .admin-lock { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border-radius: 50%; background: #2a2a2a; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; color: var(--muted); transition: background 0.15s, color 0.15s; z-index: 100; user-select: none; }
     .admin-lock:hover { color: var(--text); }
-    .admin-lock.active { background: var(--text); color: var(--bg); }
+    .admin-lock.active { background: var(--link); color: #fff; border-color: var(--link); }
 
-    .admin-login { position: fixed; inset: 0; background: rgba(250,249,247,0.94); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(6px); }
+    .admin-login { position: fixed; inset: 0; background: rgba(30,30,30,0.94); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(6px); }
     .admin-login.open { display: flex; }
-    .login-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; width: 300px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
-    .login-box h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; margin-bottom: 1.25rem; color: var(--text-strong); }
-    .login-error { font-size: 0.78rem; color: #c06060; margin-top: 0.5rem; display: none; }
+    .login-box { background: #262626; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; width: 300px; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    .login-box h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; margin-bottom: 1.25rem; color: var(--text-strong); }
+    .login-error { font-size: 0.78rem; color: #cc6666; margin-top: 0.5rem; display: none; }
     .token-note { font-size: 0.73rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.55; }
 
     .bullet-fields { display: flex; flex-direction: column; gap: 0.5rem; }
     .bullet-row { display: flex; gap: 0.5rem; align-items: flex-start; }
     .bullet-row textarea { flex: 1; min-height: 52px; }
     .bullet-row .rm-btn { background: none; border: 1px solid var(--border); color: var(--muted); border-radius: 4px; padding: 0 0.5rem; cursor: pointer; font-size: 1rem; height: 36px; flex-shrink: 0; transition: color 0.15s; }
-    .bullet-row .rm-btn:hover { color: #c06060; border-color: #ddd; }
-    .add-bullet-btn { font-size: 0.78rem; color: var(--muted); background: none; border: 1px dashed var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s; font-family: 'IBM Plex Sans', sans-serif; margin-top: 0.5rem; }
-    .add-bullet-btn:hover { color: var(--text); border-color: #aaa; }
+    .bullet-row .rm-btn:hover { color: #cc6666; border-color: #444; }
+    .add-bullet-btn { font-size: 0.78rem; color: var(--muted); background: none; border: 1px dashed var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s; font-family: 'Inter', sans-serif; margin-top: 0.5rem; }
+    .add-bullet-btn:hover { color: var(--text); border-color: #555; }
   </style>
 </head>
 <body>
@@ -278,9 +278,10 @@
 
   <!-- HOME -->
   <div class="page active" id="page-home">
-    <h1>Hi, I'm Karl. <span class="wave">👋</span></h1>
-    <p style="margin-top:1rem;">
-      Creative &amp; Marketing Lead based in Pampanga, PH.
+    <div style="margin-bottom:0.75rem;font-size:1.4rem;">✌️</div>
+    <h1>Hi, I'm Karl.</h1>
+    <p class="subtitle">Creative &amp; Marketing Lead · Pampanga, PH</p>
+    <p>
       I currently work at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> — handling brand identity, funnels, and creative direction as their all-in-one marketing specialist.
       My path here wasn't linear: I started as an IT graduate, moved into tech support at Sutherland in Clark, then spent several years freelancing with startups across Pampanga doing social media, graphic design, and photography.
     </p>
@@ -289,7 +290,7 @@
       That's what I'm pursuing right now.
     </p>
     <nav>
-      <a onclick="go('cv')">CV</a><span class="sep"> · </span><a onclick="go('projects')">Projects</a><span class="sep"> · </span><a onclick="go('now')">Now</a><span class="sep"> · </span><a onclick="go('services')">My services</a><span class="sep"> · </span><a href="https://github.com/krljde" target="_blank" rel="noopener">Github↗</a>
+      <a onclick="go('cv')">CV</a><span class="sep"> · </span><a onclick="go('projects')">Projects</a><span class="sep"> · </span><a onclick="go('now')">Now</a><span class="sep"> · </span><a onclick="go('services')">Services</a><span class="sep"> · </span><a href="https://github.com/krljde" target="_blank" rel="noopener">GitHub↗</a>
     </nav>
   </div>
 
@@ -378,7 +379,7 @@
         <p class="service-desc">Events, brand shoots, short-form video. Started as a hobby, became something I do properly. Studio work at <a href="https://studio.karljde.com" target="_blank" rel="noopener">studio.karljde.com↗</a></p>
       </div>
     </div>
-    <p style="margin-top:2rem;font-size:0.88rem;">If any of this sounds useful — <a href="mailto:karljudemagbanlag@gmail.com">karljudemagbanlag@gmail.com</a></p>
+    <p style="margin-top:2rem;font-size:0.88rem;">If any of this sounds useful — <a href="/cdn-cgi/l/email-protection#d1bab0a3bdbba4b5b4bcb0b6b3b0bfbdb0b691b6bcb0b8bdffb2bebc"><span class="__cf_email__" data-cfemail="1873796a74726d7c7d75797f7a797674797f587f75797174367b7775">[email&#160;protected]</span></a></p>
   </div>
 
   <!-- ADMIN -->
@@ -480,7 +481,7 @@
 
 <div class="admin-lock" id="admin-lock" onclick="clickLock()" title="Admin">⚙</div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const ADMIN_PASSWORD = 'karl2025admin';
   const GITHUB_OWNER   = 'krljde';
   const GITHUB_REPO    = 'krljde.github.io';
@@ -790,13 +791,4 @@
     if (!s) return '';
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  function showStatus(id, msg, isErr) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = msg;
-    el.className = 'status-msg ' + (isErr ? 'err' : 'ok');
-    setTimeout(() => { el.className = 'status-msg'; }, 5000);
-  }
-</script>
-</body>
-</html>
+  function showStatus(id, msg, is
