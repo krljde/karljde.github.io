@@ -484,7 +484,7 @@
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const ADMIN_PASSWORD = 'karl2025admin';
   const GITHUB_OWNER   = 'krljde';
-  const GITHUB_REPO    = 'krljde.github.io';
+  const GITHUB_REPO    = 'karljde.github.io';
   const FILE_NOW       = 'data/now.json';
   const FILE_PROJECTS  = 'data/projects.json';
   const API_BASE       = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/`;
@@ -528,7 +528,7 @@
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.message || 'Write failed: ' + res.status); }
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(`${res.status}: ${e.message || 'Write failed'}`); }
     return res.json();
   }
 
@@ -542,7 +542,7 @@
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.message || 'Upload failed: ' + res.status); }
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(`${res.status}: ${e.message || 'Upload failed'}`); }
     return res.json();
   }
 
@@ -798,6 +798,11 @@
     el.className = 'status-msg ' + (isErr ? 'err' : 'ok');
     setTimeout(() => { el.className = 'status-msg'; }, 5000);
   }
+
+  updateTokenStatus();
+  initBulletFields();
+  renderNow().catch(() => {});
+  renderProjects().catch(() => {});
 </script>
 </body>
 </html>
