@@ -642,18 +642,25 @@
     }
   }
 
-  function startNowEdit(index, entry) {
-    editingNowIndex = index;
-    editingNowMedia = entry.media || null;
-    document.getElementById('now-heading').value = entry.heading || '';
-    setBullets('now-bullets-input', entry.bullets || []);
-    setCurrentMediaNote('now-current-media', editingNowMedia);
-    document.getElementById('now-edit-note').style.display = 'block';
-    document.getElementById('btn-cancel-now').style.display = 'inline-block';
-    setButtonText('btn-add-now', 'Update entry');
-    resetMediaInput('now-media-file', 'now-media-preview');
-    showStatus('now-status', 'Editing entry…', false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  async function startNowEdit(index) {
+    try {
+      const { data } = await readJsonFile(FILE_NOW);
+      const entry = data[index];
+      if (!entry) return;
+      editingNowIndex = index;
+      editingNowMedia = entry.media || null;
+      document.getElementById('now-heading').value = entry.heading || '';
+      setBullets('now-bullets-input', entry.bullets || []);
+      setCurrentMediaNote('now-current-media', editingNowMedia);
+      document.getElementById('now-edit-note').style.display = 'block';
+      document.getElementById('btn-cancel-now').style.display = 'inline-block';
+      setButtonText('btn-add-now', 'Update entry');
+      resetMediaInput('now-media-file', 'now-media-preview');
+      showStatus('now-status', 'Editing entry…', false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      showStatus('now-status', e.message || 'Could not load entry for editing.', true);
+    }
   }
 
   function cancelNowEdit() {
@@ -668,20 +675,27 @@
     resetMediaInput('now-media-file', 'now-media-preview');
   }
 
-  function startProjectEdit(index, project) {
-    editingProjectIndex = index;
-    editingProjectMedia = project.media || null;
-    document.getElementById('proj-title').value = project.title || '';
-    document.getElementById('proj-desc').value = project.desc || '';
-    document.getElementById('proj-url').value = project.url || '';
-    document.getElementById('proj-tags').value = project.tags || '';
-    setCurrentMediaNote('proj-current-media', editingProjectMedia);
-    document.getElementById('proj-edit-note').style.display = 'block';
-    document.getElementById('btn-cancel-proj').style.display = 'inline-block';
-    setButtonText('btn-add-proj', 'Update project');
-    resetMediaInput('proj-media-file', 'proj-media-preview');
-    showStatus('proj-status', 'Editing project…', false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  async function startProjectEdit(index) {
+    try {
+      const { data } = await readJsonFile(FILE_PROJECTS);
+      const project = data[index];
+      if (!project) return;
+      editingProjectIndex = index;
+      editingProjectMedia = project.media || null;
+      document.getElementById('proj-title').value = project.title || '';
+      document.getElementById('proj-desc').value = project.desc || '';
+      document.getElementById('proj-url').value = project.url || '';
+      document.getElementById('proj-tags').value = project.tags || '';
+      setCurrentMediaNote('proj-current-media', editingProjectMedia);
+      document.getElementById('proj-edit-note').style.display = 'block';
+      document.getElementById('btn-cancel-proj').style.display = 'inline-block';
+      setButtonText('btn-add-proj', 'Update project');
+      resetMediaInput('proj-media-file', 'proj-media-preview');
+      showStatus('proj-status', 'Editing project…', false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      showStatus('proj-status', e.message || 'Could not load project for editing.', true);
+    }
   }
 
   function cancelProjectEdit() {
@@ -752,7 +766,7 @@
       if (!data.length) { el.innerHTML = '<div class="empty-state">No entries yet.</div>'; return; }
       el.innerHTML = data.slice().reverse().map((e, ri) => {
         const i = data.length - 1 - ri;
-        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(e.heading)}</strong><span>${(e.bullets||[]).length} bullet(s)${e.media?' · has media':''}</span></div><div class="admin-item-actions"><button class="btn btn-ghost btn-small" onclick="moveNow(${i}, -1)" ${i===0?'disabled':''}>↑</button><button class="btn btn-ghost btn-small" onclick="moveNow(${i}, 1)" ${i===data.length-1?'disabled':''}>↓</button><button class="btn btn-ghost btn-small" onclick="startNowEdit(${i}, ${escAttr(JSON.stringify(e))})">Edit</button><button class="btn btn-danger btn-small" onclick="deleteNow(${i})">Remove</button></div></div>`;
+        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(e.heading)}</strong><span>${(e.bullets||[]).length} bullet(s)${e.media?' · has media':''}</span></div><div class="admin-item-actions"><button class="btn btn-ghost btn-small" onclick="moveNow(${i}, -1)" ${i===0?'disabled':''}>↑</button><button class="btn btn-ghost btn-small" onclick="moveNow(${i}, 1)" ${i===data.length-1?'disabled':''}>↓</button><button class="btn btn-ghost btn-small" onclick="startNowEdit(${i})">Edit</button><button class="btn btn-danger btn-small" onclick="deleteNow(${i})">Remove</button></div></div>`;
       }).join('');
     } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
   }
@@ -765,7 +779,7 @@
       if (!data.length) { el.innerHTML = '<div class="empty-state">No projects yet.</div>'; return; }
       el.innerHTML = data.slice().reverse().map((p, ri) => {
         const i = data.length - 1 - ri;
-        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(p.title)}</strong><span>${esc(p.tags||'')}${p.media?' · has media':''}</span></div><div class="admin-item-actions"><button class="btn btn-ghost btn-small" onclick="moveProject(${i}, -1)" ${i===0?'disabled':''}>↑</button><button class="btn btn-ghost btn-small" onclick="moveProject(${i}, 1)" ${i===data.length-1?'disabled':''}>↓</button><button class="btn btn-ghost btn-small" onclick="startProjectEdit(${i}, ${escAttr(JSON.stringify(p))})">Edit</button><button class="btn btn-danger btn-small" onclick="deleteProject(${i})">Remove</button></div></div>`;
+        return `<div class="admin-item"><div class="admin-item-info"><strong>${esc(p.title)}</strong><span>${esc(p.tags||'')}${p.media?' · has media':''}</span></div><div class="admin-item-actions"><button class="btn btn-ghost btn-small" onclick="moveProject(${i}, -1)" ${i===0?'disabled':''}>↑</button><button class="btn btn-ghost btn-small" onclick="moveProject(${i}, 1)" ${i===data.length-1?'disabled':''}>↓</button><button class="btn btn-ghost btn-small" onclick="startProjectEdit(${i})">Edit</button><button class="btn btn-danger btn-small" onclick="deleteProject(${i})">Remove</button></div></div>`;
       }).join('');
     } catch { el.innerHTML = '<div class="empty-state">Could not load.</div>'; }
   }
