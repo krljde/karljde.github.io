@@ -124,6 +124,40 @@
     nav a:hover { color: var(--link-hover); border-bottom-color: var(--link-hover); }
     nav .sep { color: var(--muted); user-select: none; }
 
+    .home-availability {
+      margin-top: 0.55rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+      user-select: none;
+    }
+    .home-availability-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #20d85a;
+      box-shadow: 0 0 0 rgba(32, 216, 90, 0.55);
+      animation: pulse-availability-dot 1.8s infinite;
+      flex-shrink: 0;
+    }
+    .home-availability-text {
+      color: #7dff9b;
+      animation: pulse-availability-text 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse-availability-dot {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(32, 216, 90, 0.5); }
+      70% { transform: scale(1.14); box-shadow: 0 0 0 6px rgba(32, 216, 90, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(32, 216, 90, 0); }
+    }
+    @keyframes pulse-availability-text {
+      0% { opacity: 0.72; text-shadow: 0 0 0 rgba(125, 255, 155, 0); }
+      50% { opacity: 1; text-shadow: 0 0 7px rgba(125, 255, 155, 0.28); }
+      100% { opacity: 0.72; text-shadow: 0 0 0 rgba(125, 255, 155, 0); }
+    }
+
+
     .cv-intro { margin-bottom: 0.5rem; }
     .cv-intro p { font-size: 0.93rem; line-height: 1.8; }
 
@@ -272,18 +306,17 @@
   <div class="page active" id="page-home">
     <div style="margin-bottom:0.75rem;font-size:1.4rem;">✌️</div>
     <h1>Hi, I'm Karl.</h1>
-    <p class="subtitle">Automation Expert • Creative &amp; Marketing Lead · Ph</p>
+    <p class="subtitle">Design, Marketing &amp; Automation Expert</p>
     <p>
-      I currently work at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> — handling brand identity, funnels, and creative direction as their all-in-one marketing specialist.
-      My path here wasn't linear: I started as an IT graduate, moved into tech support at Sutherland in Clark, then spent several years freelancing with startups across Pampanga doing social media, graphic design, and photography.
-    </p>
-    <p>
-      Lately I've been serious about <strong>Marketing Automation</strong> — building with n8n, Zapier, and GoHighLevel to close the gap between getting a lead and actually securing a client.
-      That's what I'm pursuing right now.
+      I build systems for growth — design, marketing, and automation working together to help businesses run better and convert more consistently. Most of my time lately goes into workflows, funnels, and creative direction that actually support the business behind it. <a href="mailto:karljudemagbanlag@gmail.com">Work with me.</a>
     </p>
     <nav>
       <a onclick="go('cv')">CV</a><span class="sep"> · </span><a onclick="go('projects')">Projects</a><span class="sep"> · </span><a onclick="go('now')">Now</a><span class="sep"> · </span><a onclick="go('services')">Services</a><span class="sep"> · </span><a href="https://github.com/krljde" target="_blank" rel="noopener">GitHub↗</a>
     </nav>
+    <div class="home-availability">
+      <span class="home-availability-dot"></span>
+      <span class="home-availability-text">available for work</span>
+    </div>
   </div>
 
   <div class="page" id="page-cv">
@@ -293,10 +326,7 @@
 
     <div class="cv-intro">
       <p>
-        I'm a creative and marketing lead based in Pampanga, PH.
-        I currently work at <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a> — brand, funnels, and creative systems.
-        My path here went: IT graduate → tech support → freelancer → in-house lead.
-        Originally trained as an IT specialist and now pursuing Automation.
+        I work across design, marketing, and automation — building systems that help businesses grow, operate better, and present themselves more clearly. My background started in IT, moved through support and freelance creative work, and eventually grew into a mix of systems thinking, creative direction, and marketing execution.
       </p>
     </div>
 
