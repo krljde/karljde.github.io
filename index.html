@@ -481,7 +481,12 @@
 
 <div class="admin-lock" id="admin-lock" onclick="clickLock()" title="Admin">⚙</div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+  updateTokenStatus();
+  initBulletFields();
+  renderNow().catch(() => {});
+  renderProjects().catch(() => {});
+</script><script>
   const ADMIN_PASSWORD = 'karl2025admin';
   const GITHUB_OWNER   = 'krljde';
   const GITHUB_REPO    = 'karljde.github.io';
@@ -510,39 +515,47 @@
 
   // GITHUB API
   async function ghGet(path) {
-    const res = await fetch(API_BASE + path + '?ref=main&t=' + Date.now(), {
-      headers: { 'Accept': 'application/vnd.github.v3+json' }
-    });
+    const token = getToken();
+    const headers = { 'Accept': 'application/vnd.github.v3+json' };
+    if (token) headers['Authorization'] = `token ${token}`;
+    const res = await fetch(API_BASE + path + '?ref=main&t=' + Date.now(), { headers });
     if (res.status === 404) return null;
     if (!res.ok) throw new Error('GitHub fetch failed: ' + res.status);
     return res.json();
   }
 
+  async function getFileSha(path) {
+    const file = await ghGet(path).catch(() => null);
+    return file?.sha || null;
+  }
+
   async function ghPut(path, content, sha, message) {
     const token = getToken();
     if (!token) throw new Error('No GitHub token. Add it in admin first.');
+    const effectiveSha = sha || await getFileSha(path);
     const body = { message, content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))), branch: 'main' };
-    if (sha) body.sha = sha;
+    if (effectiveSha) body.sha = effectiveSha;
     const res = await fetch(API_BASE + path, {
       method: 'PUT',
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.message || 'Write failed: ' + res.status); }
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(`${res.status}: ${e.message || 'Write failed'}`); }
     return res.json();
   }
 
   async function ghPutBinary(path, base64data, sha, message) {
     const token = getToken();
     if (!token) throw new Error('No GitHub token.');
+    const effectiveSha = sha || await getFileSha(path);
     const body = { message, content: base64data, branch: 'main' };
-    if (sha) body.sha = sha;
+    if (effectiveSha) body.sha = effectiveSha;
     const res = await fetch(API_BASE + path, {
       method: 'PUT',
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.message || 'Upload failed: ' + res.status); }
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(`${res.status}: ${e.message || 'Upload failed'}`); }
     return res.json();
   }
 
@@ -842,6 +855,11 @@
     el.className = 'status-msg ' + (isErr ? 'err' : 'ok');
     setTimeout(() => { el.className = 'status-msg'; }, 5000);
   }
+
+  updateTokenStatus();
+  initBulletFields();
+  renderNow().catch(() => {});
+  renderProjects().catch(() => {});
 </script>
 </body>
 </html>
