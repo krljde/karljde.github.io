@@ -298,13 +298,41 @@
     .bullet-row .rm-btn:hover { color: #cc6666; border-color: #444; }
     .add-bullet-btn { font-size: 0.78rem; color: var(--muted); background: none; border: 1px dashed var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s; font-family: 'Inter', sans-serif; margin-top: 0.5rem; }
     .add-bullet-btn:hover { color: var(--text); border-color: #555; }
+  
+    .peace-once {
+      transform-origin: 70% 80%;
+    }
+
+    .peace-once.animate {
+      animation: peace-wave 1.8s ease-in-out forwards;
+    }
+
+    @keyframes peace-wave {
+      0%   { transform: rotate(0deg); }
+      10%  { transform: rotate(16deg); }
+      20%  { transform: rotate(-7deg); }
+      30%  { transform: rotate(16deg); }
+      40%  { transform: rotate(-3deg); }
+      50%  { transform: rotate(10deg); }
+      60%  { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+
   </style>
 </head>
 <body>
 <div class="site">
 
   <div class="page active" id="page-home">
-    <div style="margin-bottom:0.75rem;font-size:1.4rem;">✌️</div>
+    <div style="margin-bottom:0.75rem;">
+  <svg class="peace-once" viewBox="0 0 24 24" fill="none" width="28" height="28">
+    <path d="M9 11V5M15 11V5M5 13c0 3 2 6 7 6s7-3 7-6"
+      stroke="#dcdcdc"
+      stroke-width="1.7"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+  </svg>
+</div>
     <h1>Hi, I'm Karl.</h1>
     <p class="subtitle">Design, Marketing &amp; Automation Expert</p>
     <p>
@@ -1166,6 +1194,15 @@
   initBulletFields();
   renderNow().catch(() => {});
   renderProjects().catch(() => {});
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const peace = document.querySelector('.peace-once');
+    if (!peace) return;
+    setTimeout(() => {
+      peace.classList.add('animate');
+    }, 300);
+  });
+
 </script>
 </body>
 </html>
