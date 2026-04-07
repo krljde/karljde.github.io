@@ -1,36 +1,42 @@
-# Karl J. | Creative Director | Marketing Lead & Automation Expert 🚀
+# karljde.com
 
-Welcome to my digital headquarters. I am a full-stack marketing professional and creative specialist based in the Philippines, dedicated to bridging the gap between high-end design and technical operational efficiency.
+This is my personal site — built as a simple, minimal space to share my work, projects, and what I’m currently focused on.
 
----
-
-## ⚡ What I Do
-I provide a "Full-Spectrum" growth engine for businesses, covering everything from the first brand touchpoint to the final automated workflow.
-
-* **🎨 Creative & Design:** Brand identity, digital assets, and physical marketing stationery.
-* **📸 Content Production:** Professional photography and videography for modern brands.
-* **📈 Performance Marketing:** Organic social media growth, media buying, and GoHighLevel funnel builds.
-* **🤖 Operational Automation:** Building "self-running" businesses using **n8n** and **Zapier**.
+The site is intentionally lightweight and runs entirely on static files, with a small admin layer connected to GitHub for content updates.
 
 ---
 
-## 📖 My Journey
-My career began in 2022, helping a small business thrive during the tail end of the pandemic. By focusing on organic community building, I grew their following to **15,000+** with an **80% conversion rate** to monthly recurring clients—all without ad spend.
+## Structure
 
-Today, I serve as an all-in-one marketing partner for established institutions, managing everything from brand KPIs to the automation systems that prevent lead churn.
-
----
-
-## 🛠️ The Tech Stack
-* **Design:** Adobe Creative Suite (Photoshop, Illustrator)
-* **Automation:** n8n, Zapier, GoHighLevel
-* **Web:** GitHub Pages, Cloudflare, Framer
-* **Marketing:** Meta Ads Manager, CRM Management, SEO
+- `index.html` — main site and interface  
+- `data/now.json` — entries for the /now page  
+- `data/projects.json` — project listings  
+- `media/` — uploaded images and videos  
 
 ---
 
-## 🔗 Connect With Me
-* **Website:** [karljde.com](https://karljde.com)
-* **Location:** Pampanga, Philippines 🇵🇭
+## How it works
 
-*"I build the brands people see, the ads they click, and the systems that handle the work while you sleep."*
+Content is managed directly through the site using a GitHub token.
+
+Updates (now entries, projects, media) are written straight to the repository via the GitHub API, allowing the site to function like a lightweight CMS without a backend.
+
+---
+
+## Stack
+
+- HTML, CSS, vanilla JavaScript  
+- GitHub Pages  
+- GitHub API (content updates)  
+
+---
+
+## Notes
+
+The goal of this setup is to keep things simple, fast, and fully controlled — no frameworks, no external dependencies, just a clean system that does exactly what it needs to.
+
+---
+
+If you’re curious about how it works or want to build something similar, feel free to reach out.
+
+📧 karljudemagbanlag@gmail.com
