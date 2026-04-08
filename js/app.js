@@ -19,6 +19,7 @@ let editingNowIndex      = null;
 let editingNowMedia      = null;
 let editingProjectIndex  = null;
 let editingProjectMedia  = null;
+const RECENT_WRITE_MS     = 180000;
 
 /* ─────────────────────────────────────────
    TOKEN HELPERS
@@ -141,7 +142,26 @@ function hasRecentWrite(path, maxAgeMs = 15000) {
 
 async function readJsonFile(path) {
   const cached = readLocalCache(path);
-  if (cached && hasRecentWrite(path)) return { data: cached, sha: null };
+
+  // Keep freshly saved data stable for a bit.
+  // This prevents a second admin action (like saving a project right after a now entry)
+  // from re-fetching an older GitHub snapshot and briefly overwriting the UI.
+  if (cached && hasRecentWrite(path, RECENT_WRITE_MS)) {
+    return { data: cached, sha: null };
+  }
+
+  // When a token is available, prefer the GitHub Contents API for fresher reads.
+  // This is especially helpful in admin mode right after writes.
+  try {
+    const file = await ghGet(path);
+    if (file?.content) {
+      const decoded = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+      const data = JSON.parse(decoded);
+      try { localStorage.setItem(getCacheKey(path), JSON.stringify(data)); } catch {}
+      return { data, sha: file.sha || null };
+    }
+  } catch {}
+
   try {
     const res = await fetch(RAW_BASE + path + '?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('RAW fetch failed');
