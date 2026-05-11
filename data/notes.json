@@ -11,5 +11,17 @@
     ],
     "html": "<p>This is the first note flowing from my Obsidian vault out to <strong>karljde.com</strong>.</p>\n<p>I built a small publish pipeline that scans this vault for any note with <code>publish: true</code> in its frontmatter, converts the markdown to HTML, copies any referenced media into the site repo, and writes a single <code>data/notes.json</code> that the site renders.</p>\n<h2>Why</h2>\n<p>The plan all along was for this 2nd brain to feed a public personal-brand presence. Most of my thinking will stay private — daily notes, work decisions, family things — but a small percentage gets surfaced here: things I&#39;m learning about automation, freelancing, and building systems for small businesses.</p>\n<h2>What gets published</h2>\n<ul>\n<li>Anything tagged <code>publish: true</code> in the frontmatter.</li>\n<li>Tags from the frontmatter (minus <code>publish</code>) show up on the site for filtering.</li>\n<li>The date defaults to the file&#39;s modified time, or whatever I put in frontmatter.</li>\n</ul>\n<p>That&#39;s it. No build step, no platform — just <code>node .publish/publish.js</code> when I want to ship.</p>\n",
     "cover": null
+  },
+  {
+    "id": "test-note-from-obsidian",
+    "title": "Test note from Obsidian",
+    "slug": "test-note-from-obsidian",
+    "date": "2026-05-12",
+    "excerpt": "Short hook. One sentence — the thing you&#39;d say to make a friend keep reading. The point (Why does this matter? Lead with the conclusion.) The detail (Argument, story, or walkthrough.) So what (What should the reader…",
+    "tags": [
+      "writing"
+    ],
+    "html": "<blockquote>\n<p>Short hook. One sentence — the thing you&#39;d say to make a friend keep reading.</p>\n</blockquote>\n<h2>The point</h2>\n<p>(Why does this matter? Lead with the conclusion.)</p>\n<h2>The detail</h2>\n<p>(Argument, story, or walkthrough.)</p>\n<h2>So what</h2>\n<p>(What should the reader do, think, or try?)</p>\n",
+    "cover": null
   }
 ]
