@@ -426,3 +426,82 @@ nav .sep { color: var(--muted); user-select: none; }
   transition: color 0.15s, border-color 0.15s;
 }
 .add-bullet-btn:hover { color: var(--text); border-color: #555; }
+
+/* ─────────────────────────────────────────
+   NOTES
+───────────────────────────────────────── */
+.note-card {
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 8px;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.note-card:hover { border-color: var(--line-strong, #444); }
+.note-card.open  { cursor: default; }
+.note-cover {
+  display: block;
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.9rem;
+}
+.note-date {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+.note-title {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+.note-excerpt {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+.note-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.note-body {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line, #2a2a2a);
+  cursor: text;
+  line-height: 1.65;
+}
+.note-body p   { margin: 0 0 0.9em; }
+.note-body h2  { margin: 1.5em 0 0.5em; font-size: 1.1rem; font-weight: 500; }
+.note-body h3  { margin: 1.3em 0 0.4em; font-size: 1rem; font-weight: 500; }
+.note-body ul, .note-body ol { padding-left: 1.3em; margin: 0 0 0.9em; }
+.note-body li  { margin: 0.2em 0; }
+.note-body blockquote {
+  border-left: 2px solid var(--line, #2a2a2a);
+  padding-left: 0.9em;
+  color: var(--muted);
+  margin: 0 0 0.9em;
+}
+.note-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(255,255,255,0.06);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+.note-body pre {
+  background: rgba(255,255,255,0.04);
+  padding: 0.9em 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0 0 0.9em;
+}
+.note-body pre code { background: none; padding: 0; }
+.note-body img, .note-body video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0.4em 0;
+}
+.note-body a { text-decoration: underline; }

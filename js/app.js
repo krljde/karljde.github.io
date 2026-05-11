@@ -7,6 +7,7 @@ const GITHUB_REPO    = 'karljde.github.io';
 const DEFAULT_BRANCH = 'main';
 const FILE_NOW       = 'data/now.json';
 const FILE_PROJECTS  = 'data/projects.json';
+const FILE_NOTES     = 'data/notes.json';
 const API_BASE       = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/`;
 const RAW_BASE       = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${DEFAULT_BRANCH}/`;
 
@@ -211,6 +212,7 @@ function go(page) {
   }
   if (page === 'now')      renderNow();
   if (page === 'projects') renderProjects();
+  if (page === 'notes')    renderNotes();
   if (page === 'admin') {
     updateTokenStatus();
     loadAdminNow();
@@ -272,6 +274,46 @@ async function renderProjects() {
   }
 }
 
+/* ─────────────────────────────────────────
+   RENDER — NOTES
+───────────────────────────────────────── */
+let expandedNoteSlug = null;
+
+async function renderNotes() {
+  const el = document.getElementById('notes-list');
+  el.innerHTML = '<div class="loading">Loading…</div>';
+  try {
+    const { data } = await readJsonFile(FILE_NOTES);
+    if (!data.length) { el.innerHTML = '<p class="empty-state">No notes yet.</p>'; return; }
+    el.innerHTML = data.map(n => {
+      const isOpen   = n.slug === expandedNoteSlug;
+      const coverImg = n.cover ? `<img class="note-cover" src="${esc(n.cover)}" alt="" loading="lazy"/>` : '';
+      const tagsHtml = (n.tags || []).map(t => `<span class="project-tag">${esc(t)}</span>`).join('');
+      return `<div class="note-card ${isOpen ? 'open' : ''}" onclick="toggleNote('${esc(n.slug)}')">
+        ${coverImg}
+        <div class="note-date">${esc(n.date)}</div>
+        <div class="note-title">${esc(n.title)}</div>
+        <p class="note-excerpt">${esc(n.excerpt || '')}</p>
+        <div class="note-tags">${tagsHtml}</div>
+        ${isOpen ? `<div class="note-body" onclick="event.stopPropagation()">${n.html}</div>` : ''}
+      </div>`;
+    }).join('');
+  } catch {
+    el.innerHTML = '<p class="empty-state">Couldn\'t load notes.</p>';
+  }
+}
+
+function toggleNote(slug) {
+  expandedNoteSlug = (expandedNoteSlug === slug) ? null : slug;
+  renderNotes();
+  if (expandedNoteSlug) {
+    requestAnimationFrame(() => {
+      const open = document.querySelector('.note-card.open');
+      if (open) open.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+}
+
 function renderMediaTag(mediaPath, cssClass) {
   const url     = RAW_BASE + mediaPath;
   const isVideo = /\.(mp4|webm|mov|ogg)$/i.test(mediaPath);
@@ -281,7 +323,7 @@ function renderMediaTag(mediaPath, cssClass) {
 }
 
 async function refreshViews() {
-  await Promise.allSettled([renderNow(), renderProjects(), loadAdminNow(), loadAdminProjects()]);
+  await Promise.allSettled([renderNow(), renderProjects(), renderNotes(), loadAdminNow(), loadAdminProjects()]);
 }
 
 /* ─────────────────────────────────────────
