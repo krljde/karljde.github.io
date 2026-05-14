@@ -147,12 +147,19 @@ function toggleNote(slug) {
 }
 
 function renderMediaTag(mediaPath, cssClass) {
-  const isVideo = /\.(mp4|webm|mov|ogg)$/i.test(mediaPath);
-  const url = esc(mediaPath);
+  if (/\.(mp4|webm|mov|ogg)$/i.test(mediaPath)) {
+    return `<video class="${cssClass} now-media-video" src="${esc(mediaPath)}" controls playsinline muted></video>`;
+  }
 
-  return isVideo
-    ? `<video class="${cssClass} now-media-video" src="${url}" controls playsinline muted></video>`
-    : `<img class="${cssClass}" src="${url}" alt="" loading="lazy"/>`;
+  const webp = mediaPath.replace(/\.(jpe?g|png|tiff?|avif)$/i, '.webp');
+  if (webp === mediaPath) {
+    return `<img class="${cssClass}" src="${esc(mediaPath)}" alt="" loading="lazy" decoding="async">`;
+  }
+
+  return `<picture>
+    <source srcset="${esc(webp)}" type="image/webp">
+    <img class="${cssClass}" src="${esc(mediaPath)}" alt="" loading="lazy" decoding="async">
+  </picture>`;
 }
 
 function esc(s) {
