@@ -8,6 +8,7 @@ const INLINE_MAP = {
   [FILE_NOW]: 'data-now',
   [FILE_PROJECTS]: 'data-projects'
 };
+const ROUTES = new Set(['home', 'cv', 'projects', 'notes', 'now', 'services']);
 
 /* ─────────────────────────────────────────
    DATA
@@ -33,7 +34,22 @@ async function readJsonFile(path) {
 /* ─────────────────────────────────────────
    ROUTING
 ───────────────────────────────────────── */
-function go(page) {
+function routeFromLocation() {
+  const pathRoute = window.location.pathname.replace(/^\/+|\/+$/g, '');
+  if (ROUTES.has(pathRoute)) return pathRoute;
+
+  const hashRoute = window.location.hash.replace(/^#\/?/, '');
+  if (ROUTES.has(hashRoute)) return hashRoute;
+
+  return 'home';
+}
+
+function routePath(page) {
+  return page === 'home' ? '/' : `/${page}`;
+}
+
+function go(page, options = {}) {
+  if (!ROUTES.has(page)) page = 'home';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + page);
   if (target) {
@@ -44,6 +60,10 @@ function go(page) {
   if (page === 'now')      renderNow();
   if (page === 'projects') renderProjects();
   if (page === 'notes')    renderNotes();
+
+  if (options.updateHistory !== false && window.location.pathname !== routePath(page)) {
+    history.pushState({ page }, '', routePath(page));
+  }
 }
 
 /* ─────────────────────────────────────────
@@ -187,7 +207,13 @@ function esc(s) {
    INIT
 ───────────────────────────────────────── */
 window.addEventListener('DOMContentLoaded', () => {
+  go(routeFromLocation(), { updateHistory: false });
+
   const peace = document.querySelector('.peace-once');
   if (!peace) return;
   setTimeout(() => peace.classList.add('animate'), 300);
+});
+
+window.addEventListener('popstate', () => {
+  go(routeFromLocation(), { updateHistory: false });
 });
