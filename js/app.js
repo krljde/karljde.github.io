@@ -4,11 +4,23 @@
 const FILE_NOW      = 'data/now.json';
 const FILE_PROJECTS = 'data/projects.json';
 const FILE_NOTES    = 'data/notes.json';
+const INLINE_MAP = {
+  [FILE_NOW]: 'data-now',
+  [FILE_PROJECTS]: 'data-projects'
+};
 
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
 async function readJsonFile(path) {
+  const inlineId = INLINE_MAP[path];
+  if (inlineId) {
+    const el = document.getElementById(inlineId);
+    if (el && el.textContent.trim()) {
+      try { return JSON.parse(el.textContent); } catch {}
+    }
+  }
+
   try {
     const res = await fetch(path);
     if (!res.ok) throw new Error('fetch failed');
