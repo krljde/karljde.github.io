@@ -8,5 +8,14 @@
       "N8n"
     ],
     "media": null
+  },
+  {
+    "title": "2nd project test",
+    "desc": "This is a test",
+    "url": "",
+    "tags": [
+      "automation"
+    ],
+    "media": null
   }
 ]
