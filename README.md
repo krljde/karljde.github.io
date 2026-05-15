@@ -1,42 +1,37 @@
 # karljde.com
 
-This is my personal site — built as a simple, minimal space to share my work, projects, and what I’m currently focused on.
-
-The site is intentionally lightweight and runs entirely on static files, with a small admin layer connected to GitHub for content updates.
-
----
+This is my personal site - a lightweight space for my work, projects, notes, and current focus.
 
 ## Structure
 
-- `index.html` — main site and interface  
-- `data/now.json` — entries for the /now page  
-- `data/projects.json` — project listings  
-- `media/` — uploaded images and videos  
-
----
+- `index.html` - static site shell and route containers
+- `js/app.js` - client-side routing and rendering
+- `data/now.json` - generated entries for `/now`
+- `data/projects.json` - generated project listings
+- `data/notes.json` - generated published notes
+- `media/` - images and videos used by the site
 
 ## How it works
 
-Content is managed directly through the site using a GitHub token.
+Content is written in my Obsidian vault, then published through a small Node pipeline:
 
-Updates (now entries, projects, media) are written straight to the repository via the GitHub API, allowing the site to function like a lightweight CMS without a backend.
+```text
+Obsidian vault -> .publish/publish.js -> generated JSON/media -> site repo -> Cloudflare Pages
+```
 
----
+The publisher scans selected vault folders, converts publishable notes to HTML, copies media, updates the generated JSON files, inlines small data sets into `index.html`, and refreshes SEO assets such as the sitemap.
 
 ## Stack
 
-- HTML, CSS, vanilla JavaScript  
-- GitHub Pages  
-- GitHub API (content updates)  
-
----
+- HTML, CSS, vanilla JavaScript
+- Obsidian-backed publishing pipeline
+- GitHub Actions
+- Cloudflare Pages
 
 ## Notes
 
-The goal of this setup is to keep things simple, fast, and fully controlled — no frameworks, no external dependencies, just a clean system that does exactly what it needs to.
+The goal is still the same: keep the site fast, legible, and easy to own. The difference is that content now flows outward from the vault instead of being edited through a browser-side admin layer.
 
----
+If you're curious about how it works or want to build something similar, feel free to reach out.
 
-If you’re curious about how it works or want to build something similar, feel free to reach out.
-
-📧 karljudemagbanlag@gmail.com
+Email: karljudemagbanlag@gmail.com

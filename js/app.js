@@ -9,6 +9,8 @@ const INLINE_MAP = {
   [FILE_PROJECTS]: 'data-projects'
 };
 const ROUTES = new Set(['home', 'cv', 'projects', 'notes', 'now', 'services']);
+let currentPage = null;
+let notesCache = null;
 
 /* ─────────────────────────────────────────
    DATA
@@ -31,6 +33,14 @@ async function readJsonFile(path) {
   }
 }
 
+async function getNotes() {
+  if (notesCache == null) {
+    notesCache = await readJsonFile(FILE_NOTES);
+  }
+
+  return notesCache;
+}
+
 /* ─────────────────────────────────────────
    ROUTING
 ───────────────────────────────────────── */
@@ -48,8 +58,24 @@ function routePath(page) {
   return page === 'home' ? '/' : `/${page}`;
 }
 
+function restoreRedirectedPath() {
+  const redirect = sessionStorage.getItem('spa-redirect');
+  if (!redirect) return;
+
+  sessionStorage.removeItem('spa-redirect');
+  try {
+    const url = new URL(redirect, window.location.origin);
+    if (url.origin === window.location.origin) {
+      history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+  } catch {}
+}
+
 function go(page, options = {}) {
   if (!ROUTES.has(page)) page = 'home';
+  if (page === currentPage) return;
+  currentPage = page;
+
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + page);
   if (target) {
@@ -80,7 +106,7 @@ async function renderNow() {
       return;
     }
 
-    el.innerHTML = data.slice().reverse().map(e => {
+    el.innerHTML = data.map(e => {
       const mediaHtml  = e.media ? renderMediaTag(e.media, 'now-media') : '';
       const bullets    = (e.bullets || []).filter(b => b.trim());
       const bulletsHtml = bullets.length
@@ -111,15 +137,15 @@ async function renderProjects() {
       return;
     }
 
-    el.innerHTML = data.slice().reverse().map(p => {
+    el.innerHTML = data.map(p => {
       const mediaHtml = p.media ? renderMediaTag(p.media, 'project-media') : '';
-      const tags = (p.tags || '').split(',').filter(t => t.trim())
-        .map(t => `<span class="project-tag">${esc(t.trim())}</span>`).join('');
+      const tags = (p.tags || [])
+        .map(t => `<span class="project-tag">${esc(t)}</span>`).join('');
 
       return `<div class="project-card">
         ${mediaHtml}
         <div class="project-title">${p.url
-          ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}↗</a>`
+          ? `<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}↗</a>`
           : esc(p.title)
         }</div>
         <p class="project-desc">${esc(p.desc)}</p>
@@ -138,10 +164,12 @@ let expandedNoteSlug = null;
 
 async function renderNotes() {
   const el = document.getElementById('notes-list');
-  el.innerHTML = '<div class="loading">Loading…</div>';
+  if (notesCache == null) {
+    el.innerHTML = '<div class="loading">Loading…</div>';
+  }
 
   try {
-    const data = await readJsonFile(FILE_NOTES);
+    const data = await getNotes();
     if (!data.length) {
       el.innerHTML = '<p class="empty-state">No notes yet.</p>';
       return;
@@ -152,25 +180,27 @@ async function renderNotes() {
       const coverImg = n.cover ? `<img class="note-cover" src="${esc(n.cover)}" alt="" loading="lazy"/>` : '';
       const tagsHtml = (n.tags || []).map(t => `<span class="project-tag">${esc(t)}</span>`).join('');
 
-      return `<div class="note-card ${isOpen ? 'open' : ''}" onclick="toggleNote('${esc(n.slug)}')">
-        ${coverImg}
-        <div class="note-date">${esc(n.date)}</div>
-        <div class="note-title">${esc(n.title)}</div>
-        <p class="note-excerpt">${esc(n.excerpt || '')}</p>
-        <div class="note-tags">${tagsHtml}</div>
-        ${isOpen ? `<div class="note-body" onclick="event.stopPropagation()">${n.html}</div>` : ''}
-      </div>`;
+      return `<article class="note-card ${isOpen ? 'open' : ''}">
+        <div class="note-toggle" role="button" tabindex="0" data-note-slug="${esc(n.slug)}" aria-expanded="${isOpen}">
+          ${coverImg}
+          <div class="note-date">${esc(n.date)}</div>
+          <div class="note-title">${esc(n.title)}</div>
+          <p class="note-excerpt">${esc(n.excerpt || '')}</p>
+          <div class="note-tags">${tagsHtml}</div>
+        </div>
+        ${isOpen ? `<div class="note-body">${n.html}</div>` : ''}
+      </article>`;
     }).join('');
   } catch {
     el.innerHTML = '<p class="empty-state">Couldn\'t load notes.</p>';
   }
 }
 
-function toggleNote(slug) {
+async function toggleNote(slug) {
   expandedNoteSlug = (expandedNoteSlug === slug) ? null : slug;
-  renderNotes();
+  await renderNotes();
 
-  if (expandedNoteSlug) {
+  if (expandedNoteSlug === slug) {
     requestAnimationFrame(() => {
       const open = document.querySelector('.note-card.open');
       if (open) open.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -180,7 +210,7 @@ function toggleNote(slug) {
 
 function renderMediaTag(mediaPath, cssClass) {
   if (/\.(mp4|webm|mov|ogg)$/i.test(mediaPath)) {
-    return `<video class="${cssClass} now-media-video" src="${esc(mediaPath)}" controls playsinline muted></video>`;
+    return `<video class="${cssClass} now-media-video" src="${esc(mediaPath)}" controls playsinline muted preload="metadata"></video>`;
   }
 
   const webp = mediaPath.replace(/\.(jpe?g|png|tiff?|avif)$/i, '.webp');
@@ -200,13 +230,15 @@ function esc(s) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 /* ─────────────────────────────────────────
    INIT
 ───────────────────────────────────────── */
 window.addEventListener('DOMContentLoaded', () => {
+  restoreRedirectedPath();
   go(routeFromLocation(), { updateHistory: false });
 
   const peace = document.querySelector('.peace-once');
@@ -216,4 +248,36 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('popstate', () => {
   go(routeFromLocation(), { updateHistory: false });
+});
+
+document.addEventListener('click', event => {
+  const routeLink = event.target.closest('a[data-route]');
+  if (
+    routeLink &&
+    event.button === 0 &&
+    !event.metaKey &&
+    !event.ctrlKey &&
+    !event.shiftKey &&
+    !event.altKey &&
+    !routeLink.target
+  ) {
+    event.preventDefault();
+    go(routeLink.dataset.route);
+    return;
+  }
+
+  const noteToggle = event.target.closest('[data-note-slug]');
+  if (noteToggle) {
+    void toggleNote(noteToggle.dataset.noteSlug);
+  }
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+
+  const noteToggle = event.target.closest('[data-note-slug]');
+  if (!noteToggle) return;
+
+  event.preventDefault();
+  void toggleNote(noteToggle.dataset.noteSlug);
 });

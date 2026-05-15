@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#1e1e1e"/>
   <meta name="description" content="Karl Jude M. — Automation Expert • Creative & Marketing Lead based in Pampanga, PH."/>
   <title>Karl Jude M.</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
@@ -11,14 +12,18 @@
   <meta property="og:url"         content="https://karljde.com"/>
   <meta property="og:title"       content="Karl Jude M."/>
   <meta property="og:description" content="Design, Marketing &amp; Automation Expert based in Pampanga, PH."/>
+  <meta property="og:image"       content="https://karljde.com/media/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
   <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary"/>
+  <meta name="twitter:card"        content="summary_large_image"/>
   <meta name="twitter:title"       content="Karl Jude M."/>
   <meta name="twitter:description" content="Design, Marketing &amp; Automation Expert based in Pampanga, PH."/>
+  <meta name="twitter:image"       content="https://karljde.com/media/og-image.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css?v=32fffaf2ed9e"/>
+  <link rel="stylesheet" href="css/style.css?v=128d367a2537"/>
 </head>
 <body>
 <div class="site">
@@ -27,7 +32,7 @@
        HOME
   ═══════════════════════════════════ -->
   <div class="page active" id="page-home">
-    <div style="margin-bottom:0.75rem;">
+    <div class="home-icon">
       <svg class="peace-once" viewBox="0 0 24 24" fill="none" width="28" height="28">
         <path d="M9 11V5M15 11V5M5 13c0 3 2 6 7 6s7-3 7-6"
           stroke="#dcdcdc" stroke-width="1.7"
@@ -43,12 +48,12 @@
       business behind it. <a href="mailto:karljudemagbanlag@gmail.com">Work with me.</a>
     </p>
     <nav>
-      <a onclick="go('cv')">CV</a><span class="sep"> · </span>
-      <a onclick="go('projects')">Projects</a><span class="sep"> · </span>
-      <a onclick="go('notes')">Notes</a><span class="sep"> · </span>
-      <a onclick="go('now')">Now</a><span class="sep"> · </span>
-      <a onclick="go('services')">Services</a><span class="sep"> · </span>
-      <a href="https://github.com/krljde" target="_blank" rel="noopener">GitHub↗</a>
+      <a href="/cv" data-route="cv">CV</a><span class="sep"> · </span>
+      <a href="/projects" data-route="projects">Projects</a><span class="sep"> · </span>
+      <a href="/notes" data-route="notes">Notes</a><span class="sep"> · </span>
+      <a href="/now" data-route="now">Now</a><span class="sep"> · </span>
+      <a href="/services" data-route="services">Services</a><span class="sep"> · </span>
+      <a href="https://github.com/krljde" target="_blank" rel="noopener noreferrer">GitHub↗</a>
     </nav>
     <div class="home-availability">
       <span class="home-availability-dot"></span>
@@ -60,7 +65,7 @@
        CV
   ═══════════════════════════════════ -->
   <div class="page" id="page-cv">
-    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <a href="/" class="back" data-route="home">← Karl Jude M.</a>
     <h1>Karl Jude M.</h1>
     <div class="subtitle">Curriculum Vitae</div>
 
@@ -76,7 +81,7 @@
     <div class="cv-year-heading">Present</div>
     <p class="cv-body-text">
       Doing creative and marketing work, including projects with
-      <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a>.
+      <a href="https://www.adreomontessori.com" target="_blank" rel="noopener noreferrer">Adreo Montessori</a>.
       Lately spending more time on automation — building with n8n and Zapier &amp; seeing
       how far workflows can go for small businesses.
     </p>
@@ -89,7 +94,7 @@
 
     <div class="cv-year-heading">2024</div>
     <p class="cv-body-text">
-      Joined <a href="https://www.adreomontessori.com" target="_blank" rel="noopener">Adreo Montessori</a>
+      Joined <a href="https://www.adreomontessori.com" target="_blank" rel="noopener noreferrer">Adreo Montessori</a>
       as their Marketing Lead, Creative Lead, and GHL expert. First full-time in-house role
       after years of freelancing. Responsible for brand identity, enrollment KPIs, and every
       creative touchpoint from stationery to digital funnels.
@@ -133,9 +138,9 @@
        PROJECTS
   ═══════════════════════════════════ -->
   <div class="page" id="page-projects">
-    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <a href="/" class="back" data-route="home">← Karl Jude M.</a>
     <h1>Projects</h1>
-    <p class="muted" style="margin-bottom:1.5rem;">Things I've built, shipped, or been part of.</p>
+    <p class="muted section-lede">Things I've built, shipped, or been part of.</p>
     <div id="projects-list"><div class="loading">Loading…</div></div>
   </div>
 
@@ -143,9 +148,9 @@
        NOTES
   ═══════════════════════════════════ -->
   <div class="page" id="page-notes">
-    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <a href="/" class="back" data-route="home">← Karl Jude M.</a>
     <h1>Notes</h1>
-    <p class="muted" style="margin-bottom:1.5rem;">Things I'm thinking through. Published from my Obsidian second brain.</p>
+    <p class="muted section-lede">Things I'm thinking through. Published from my Obsidian second brain.</p>
     <div id="notes-list"><div class="loading">Loading…</div></div>
   </div>
 
@@ -153,7 +158,7 @@
        NOW
   ═══════════════════════════════════ -->
   <div class="page" id="page-now">
-    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <a href="/" class="back" data-route="home">← Karl Jude M.</a>
     <h1>Now</h1>
     <div class="now-intro">
       <p>
@@ -169,9 +174,9 @@
        SERVICES
   ═══════════════════════════════════ -->
   <div class="page" id="page-services">
-    <span class="back" onclick="go('home')">← Karl Jude M.</span>
+    <a href="/" class="back" data-route="home">← Karl Jude M.</a>
     <h1>What I Do</h1>
-    <p style="margin-bottom:1.75rem;">
+    <p class="services-intro">
       I work across creative and systems —<br/>
       the part that makes people notice,<br/>
       and the part that makes everything run properly after.
@@ -202,7 +207,7 @@
         <p class="service-desc">Events, brand shoots, short-form video.<br/>Mostly used to support everything else.</p>
       </div>
     </div>
-    <p style="margin-top:2rem;font-size:0.88rem;">
+    <p class="services-contact">
       If you're working on something and need a second set of hands, feel free to <a href="mailto:karljudemagbanlag@gmail.com?subject=Work%20Inquiry">reach out</a>.
     </p>
   </div>
@@ -213,6 +218,6 @@
 <script type="application/json" id="data-now">[{"heading":"Apr 7, 2026, Ilocos","bullets":["Feeling burned out lately. But at the same time, I'm grateful for everything I've managed to start and fix. There's progress, even if it's not always obvious. Still excited for what's coming next.","For the first time in a while, I feel like I have a clear direction. Not everything is figured out, but there's a plan forming—for this year and for the baby.","Enrolled in an automation course to build a stronger foundation. I want to do this properly, not just guess my way through it.","Realized that I've already been doing small automations before without really thinking much of it. Looking at it now, it's actually something in demand. Feels like I've been sitting on something useful without fully seeing it.","Started fixing my finances. Consolidated all my credit card debts to reduce the burden and get a clearer picture of everything. It still feels heavy, but at least now it's organized and manageable.","Had a moment of clarity that I'm not financially ready yet to build a family. It's not fear, more of a wake-up call. I need a real plan—not just ideas, but something structured and intentional.","I'm going to be a dad. It wasn't planned, but I'm genuinely excited. There's still a bit of disbelief, but more than anything, it feels like something meaningful is starting.","Welcomed the year with the flu. Not the best start, but also not surprising. It's becoming a pattern, and I'm starting to take it as a sign that I need to take my health more seriously again. Thinking of getting back in shape—not just temporarily, but consistently."],"media":"media/1775560612663-1600.jpg"},{"heading":"April, 2026, Subic","bullets":["lately, I've been really into bikepacking. If things don't work out, I'll just follow my dream to travel. Cycling or walking... my plan C. Or maybe my brain's just too active… sometimes I wonder if I have ADHD.","Maybe just a dream for now… baby on the way."],"media":"media/1777592376906-1600.jpg"}]</script>
 <script type="application/json" id="data-projects">[{"title":"This is a test project","desc":"Testtttt","url":"","tags":["automation","N8n"],"media":null}]</script>
 <!-- INLINE-DATA-END -->
-<script src="js/app.js?v=058751887781"></script>
+<script src="js/app.js?v=c94768c35734" defer></script>
 </body>
 </html>
