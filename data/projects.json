@@ -17,5 +17,16 @@
       "automation"
     ],
     "media": null
+  },
+  {
+    "title": "3rd project test",
+    "desc": "another test",
+    "url": "",
+    "tags": [
+      "automation",
+      "N8n",
+      "GoHighlevel"
+    ],
+    "media": null
   }
 ]
