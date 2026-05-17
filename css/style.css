@@ -218,22 +218,14 @@ nav .sep { color: var(--muted); user-select: none; }
 
 details.now-block summary { cursor: pointer; list-style: none; user-select: none; display: flex; align-items: center; justify-content: space-between; }
 details.now-block summary::-webkit-details-marker { display: none; }
-.now-chevron-wrap {
-  position: relative;
+.now-chevron {
   width: 20px;
   height: 20px;
   margin-left: 0.5rem;
   flex-shrink: 0;
-  display: inline-block;
+  transition: transform 0.3s ease-in-out;
 }
-.now-chevron {
-  position: absolute;
-  inset: 0;
-  transition: opacity 0.2s ease;
-}
-.now-chevron-down { opacity: 0; }
-details.now-block[open] .now-chevron-up { opacity: 0; }
-details.now-block[open] .now-chevron-down { opacity: 1; }
+details.now-block[open] .now-chevron { transform: rotate(180deg); }
 details.now-block[open] summary { margin-bottom: 1rem; }
 .now-block-header {
   font-size: 0.85rem;
