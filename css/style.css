@@ -222,7 +222,8 @@ details.now-block summary::after {
   content: '▾';
   color: var(--muted);
   margin-left: 0.5rem;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
+  line-height: 1;
   display: inline-block;
   transform: rotate(180deg);
   transition: transform 0.2s ease;
