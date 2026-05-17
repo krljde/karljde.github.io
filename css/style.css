@@ -213,7 +213,14 @@ nav .sep { color: var(--muted); user-select: none; }
 .now-intro { margin-bottom: 2rem; }
 .now-intro p { font-size: 0.9rem; color: var(--muted); }
 
-.now-block { margin-bottom: 3rem; }
+.now-block { padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.now-block:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+details.now-block summary { cursor: pointer; list-style: none; user-select: none; display: flex; align-items: center; justify-content: space-between; }
+details.now-block summary::-webkit-details-marker { display: none; }
+details.now-block summary::after { content: '+'; color: var(--muted); margin-left: 0.5rem; font-size: 1rem; }
+details.now-block[open] summary::after { content: '−'; }
+details.now-block[open] summary { margin-bottom: 1rem; }
 .now-block-header {
   font-size: 0.85rem;
   font-weight: 400;

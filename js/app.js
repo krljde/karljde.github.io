@@ -98,25 +98,31 @@ function go(page, options = {}) {
 async function renderNow() {
   const el = document.getElementById('now-list');
   el.innerHTML = '<div class="loading">Loading…</div>';
-
   try {
     const data = await readJsonFile(FILE_NOW);
-    if (!data.length) {
-      el.innerHTML = '<p class="empty-state">Nothing here yet.</p>';
-      return;
-    }
+    if (!data.length) { el.innerHTML = '<p class="empty-state">Nothing here yet.</p>'; return; }
+
+    const yearOf = e => (e.date && /^\d{4}/.test(e.date))
+      ? Number(e.date.slice(0, 4))
+      : Number((String(e.heading).match(/\b(20\d{2})\b/) || [])[1]) || 0;
+    const latestYear = yearOf(data[0]);
 
     el.innerHTML = data.map(e => {
-      const mediaHtml  = e.media ? renderMediaTag(e.media, 'now-media') : '';
-      const bullets    = (e.bullets || []).filter(b => b.trim());
+      const mediaHtml = e.media ? renderMediaTag(e.media, 'now-media') : '';
+      const bullets = (e.bullets || []).filter(b => b.trim());
       const bulletsHtml = bullets.length
         ? `<ul class="now-bullets">${bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>`
         : '';
-
-      return `<div class="now-block">
-        <div class="now-block-header">${esc(e.heading)}</div>
+      if (yearOf(e) === latestYear) {
+        return `<div class="now-block">
+          <div class="now-block-header">${esc(e.heading)}</div>
+          ${mediaHtml}${bulletsHtml}
+        </div>`;
+      }
+      return `<details class="now-block now-block-collapsed">
+        <summary class="now-block-header">${esc(e.heading)}</summary>
         ${mediaHtml}${bulletsHtml}
-      </div>`;
+      </details>`;
     }).join('');
   } catch {
     el.innerHTML = '<p class="empty-state">Couldn\'t load entries.</p>';
